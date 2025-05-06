@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Consulta - ADMIN</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/formatador.js"></script>
+
+</head>
+<body>
+    
+    <div id="admin-inicial">
+        <h1>Seja bem-vindo, administrador!</h1>
+        <button onclick="abrirMenuMedico()">Menu Médico</button>
+        <button onclick="abrirMenuOutro()">Menu Atendente</button>
+        <button onclick="abrirMenuOutro()">Menu Postos de saúde</button>
+    </div>
+
+    <!-- Parte que será preenchida dinamicamente -->
+    <div id="admin-content" style="display: none;"></div>
+
+    <script>
+        function abrirMenuMedico() {
+            Swal.fire({
+                title: 'Menu Médico',
+                icon: 'info',
+                //imageUrl: '/imgs/medico.png',
+               // imageWidth: 100,
+                //imageHeight: 100,
+                showCancelButton: true,
+                confirmButtonText: 'Listar Médicos',
+                cancelButtonText: 'Cadastrar Médico',
+                showCloseButton: true,
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    carregarConteudo('/auth/admin/listar/medico');
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    carregarConteudo('/auth/admin/cadastro/medico');
+                }
+            });
+        }
+
+        function carregarConteudo(url) {
+            $.ajax({
+                url,
+                type: 'GET',
+                success: function (html) {
+                    $('#admin-inicial').hide();           // Oculta a parte inicial
+                    $('#admin-content').html(html).show(); // Mostra o conteúdo do menu
+                },
+                error: function () {
+                    Swal.fire('Erro', 'Não foi possível carregar o conteúdo.', 'error');
+                }
+            });
+        }
+
+        function voltarInicio() {
+            $('#admin-content').hide().empty(); // Esconde e limpa o conteúdo atual
+            $('#admin-inicial').show();         // Mostra a tela inicial
+        }
+    </script>
+
+</body>
+</html>

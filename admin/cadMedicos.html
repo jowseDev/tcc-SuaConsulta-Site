@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro Médico</title>
+    <!--
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/formatador.js"></script>-->
+</head>
+
+<body>
+
+    <button onclick="voltarInicio()">Fechar menu</button>
+
+    <h2>Buscar Pessoa por CPF</h2>
+    <input type="text" id="cpfInput" placeholder="Digite o CPF" maxlength="14" oninput="formatarCPF(this)" required
+        autocomplete="off">
+    <button id="buscarBtn">Buscar</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        $(document).ready(function () {
+            $('#buscarBtn').click(function () {
+                const cpf = $('#cpfInput').val();
+
+                // URL da API para buscar a pessoa
+                const urlPessoa = `http://localhost:8080/api/medico/${cpf}`;
+
+                $.ajax({
+                    url: urlPessoa,
+                    type: 'GET',
+                    success: function (pessoa) {
+                        $('#resultado').html(`
+                            <table border="1">
+                                <thead>
+                                    <tr><th>Nome</th><th>CPF</th><th>Ações</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>${pessoa.nome}</td>
+                                        <td>${pessoa.cpf}</td>
+                                        <td>
+                                            <button onclick="abrirModalMedico('${pessoa.cpf}')">Adicionar Médico</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        `);
+                    },
+                    error: function (xhr, status, error) {
+                        if (xhr.status === 404) {
+                            $('#resultado').html('<p style="color:red">Pessoa não encontrada.</p>');
+                        } else if (xhr.status === 409) {
+                            $('#resultado').html('<p style="color:orange">Essa pessoa já está cadastrada como médico.</p>');
+                        } else {
+                            $('#resultado').html('<p style="color:red">Ocorreu um erro ao buscar a pessoa.</p>');
+                        }
+                    }
+                });
+            });
+        });
+
+        // Função para abrir o modal do SweetAlert2 e promover a pessoa a médico
+        async function abrirModalMedico(cpf) {
+            const { value: formValues } = await Swal.fire({
+                title: 'Cadastrar como Médico',
+                html: `
+                    <input id="crmInput" class="swal2-input" placeholder="CRM">
+                    <input id="espInput" class="swal2-input" placeholder="Especialidade">
+                `,
+                focusConfirm: false,
+                showCancelButton: true,
+                confirmButtonText: 'Salvar',
+                preConfirm: () => {
+                    const crm = $('#crmInput').val();
+                    const especialidade = $('#espInput').val();
+
+                    if (!crm || !especialidade) {
+                        Swal.showValidationMessage("Preencha todos os campos!");
+                        return false;
+                    }
+                    return { crm, especialidade };
+                }
+            });
+
+            if (formValues) {
+                try {
+                    // Mostra o loading enquanto a requisição está sendo feita
+                    Swal.showLoading();
+
+                    // Defina aqui sua URL para a rota de adicionar médico (POST)
+                    const urlMedico = `http://localhost:8080/api/medico/adicionar`;
+
+                    // Envia a requisição para adicionar o médico
+                    await $.ajax({
+                        url: urlMedico,
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            cpf: cpf,
+                            crm: formValues.crm,
+                            especialidade: formValues.especialidade
+                        }),
+                        success: function (response) {
+                            Swal.fire('Sucesso!', 'Pessoa promovida a médico.', 'success');
+                        },
+                        error: function (xhr, status, error) {
+                            Swal.fire('Erro', 'Não foi possível promover a pessoa.', 'error');
+                        }
+                    });
+
+                } catch (err) {
+                    Swal.fire('Erro', 'Ocorreu um erro ao adicionar o médico.', 'error');
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
+
+<!--async function abrirModalMedico(cpf) {
+    // Requisição AJAX para verificar se a pessoa é um médico
+    $.ajax({
+        url: `http://localhost:8080/api/pessoa/${cpf}`, // Alterei a URL para buscar pessoa diretamente
+        type: 'GET',
+        success: function (pessoa) {
+            // A pessoa foi encontrada, agora verifica se ela é médico
+            $.ajax({
+                url: `http://localhost:8080/api/medico/${cpf}`,
+                type: 'GET',
+                success: function () {
+                    // Se a pessoa já for médico, exibe uma mensagem informando
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Atenção',
+                        text: 'Esta pessoa já está cadastrada como médico.',
+                    });
+                },
+                error: function () {
+                    // Se a pessoa não for médico, exibe o formulário de cadastro
+                    mostrarFormularioCadastroMedico(pessoa);
+                }
+            });
+        },
+        error: function () {
+            // Se a pessoa não for encontrada, exibe mensagem de erro
+            Swal.fire({
+                icon: 'error',
+                title: 'Pessoa não encontrada',
+                text: 'Não foi possível encontrar uma pessoa com este CPF.',
+            });
+        }
+    });
+}
+
+function mostrarFormularioCadastroMedico(pessoa) {
+    // Exibe o SweetAlert2 com o formulário para cadastrar o médico
+    Swal.fire({
+        title: `Cadastrar Médico - ${pessoa.nome}`,  // Exibe o nome da pessoa
+        html: `
+            <p><strong>CPF:</strong> ${pessoa.cpf}</p>   
+            <input id="crmInput" class="swal2-input" placeholder="CRM">
+            <input id="espInput" class="swal2-input" placeholder="Especialidade">
+        `,
+        focusConfirm: false,
+        showCancelButton: true,
+        confirmButtonText: 'Salvar',
+        preConfirm: () => {
+            const crm = $('#crmInput').val();
+            const especialidade = $('#espInput').val();
+
+            if (!crm || !especialidade) {
+                Swal.showValidationMessage("Preencha todos os campos!");
+                return false;
+            }
+            return { crm, especialidade };
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Se o usuário confirmou, envia os dados para a API
+            cadastrarMedico(pessoa.cpf, result.value.crm, result.value.especialidade);
+        }
+    });
+}
+
+function cadastrarMedico(cpf, crm, especialidade) {
+    // Envia a requisição AJAX para cadastrar o médico
+    $.ajax({
+        url: `http://localhost:8080/api/medico/adicionar`,
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ cpf, crm, especialidade }),
+        success: function () {
+            Swal.fire('Sucesso!', 'Pessoa promovida a médico.', 'success');
+        },
+        error: function () {
+            Swal.fire('Erro', 'Não foi possível promover a pessoa a médico.', 'error');
+        }
+    });
+}
+-->
+
+<!-- CÓDIGO DO DIA 21/04/25
+  $(document).ready(function () {
+            $('#buscarBtn').click(function () {
+                const cpf = $('#cpfInput').val();
+
+                // URL da API para buscar a pessoa
+                const urlPessoa = `http://localhost:8080/api/medico/${cpf}`;
+
+                $.ajax({
+                    url: urlPessoa,
+                    type: 'GET',
+                    success: function (pessoa) {
+                        $('#resultado').html(`
+                            <table border="1">
+                                <thead>
+                                    <tr><th>Nome</th><th>CPF</th><th>Ações</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>${pessoa.nome}</td>
+                                        <td>${pessoa.cpf}</td>
+                                        <td>
+                                            <button onclick="abrirModalMedico('${pessoa.cpf}')">Adicionar Médico</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        `);
+                    },
+                    error: function (xhr, status, error) {
+                        if (xhr.status === 404) {
+                            $('#resultado').html('<p style="color:red">Pessoa não encontrada.</p>');
+                        } else if (xhr.status === 409) {
+                            $('#resultado').html('<p style="color:orange">Essa pessoa já está cadastrada como médico.</p>');
+                        } else {
+                            $('#resultado').html('<p style="color:red">Ocorreu um erro ao buscar a pessoa.</p>');
+                        }
+                    }
+                });
+            });
+        });
+
+        // Função para abrir o modal do SweetAlert2 e promover a pessoa a médico
+        async function abrirModalMedico(cpf) {
+            const { value: formValues } = await Swal.fire({
+                title: 'Cadastrar como Médico',
+                html: `
+                    <input id="crmInput" class="swal2-input" placeholder="CRM">
+                    <input id="espInput" class="swal2-input" placeholder="Especialidade">
+                `,
+                focusConfirm: false,
+                showCancelButton: true,
+                confirmButtonText: 'Salvar',
+                preConfirm: () => {
+                    const crm = $('#crmInput').val();
+                    const especialidade = $('#espInput').val();
+
+                    if (!crm || !especialidade) {
+                        Swal.showValidationMessage("Preencha todos os campos!");
+                        return false;
+                    }
+                    return { crm, especialidade };
+                }
+            });
+
+            if (formValues) {
+                try {
+                    // Mostra o loading enquanto a requisição está sendo feita
+                    Swal.showLoading();
+
+                    // Defina aqui sua URL para a rota de adicionar médico (POST)
+                    const urlMedico = `http://localhost:8080/api/medico/adicionar`;
+
+                    // Envia a requisição para adicionar o médico
+                    await $.ajax({
+                        url: urlMedico,
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            cpf: cpf,
+                            crm: formValues.crm,
+                            especialidade: formValues.especialidade
+                        }),
+                        success: function (response) {
+                            Swal.fire('Sucesso!', 'Pessoa promovida a médico.', 'success');
+                        },
+                        error: function (xhr, status, error) {
+                            Swal.fire('Erro', 'Não foi possível promover a pessoa.', 'error');
+                        }
+                    });
+
+                } catch (err) {
+                    Swal.fire('Erro', 'Ocorreu um erro ao adicionar o médico.', 'error');
+                }
+            }
+        }-->
