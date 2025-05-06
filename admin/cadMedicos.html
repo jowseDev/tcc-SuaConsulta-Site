@@ -4,22 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastro Médico</title>
-    <!--
+    <link rel="stylesheet" href="../css/cadMedicos.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/formatador.js"></script>-->
+    <script src="/js/formatador.js"></script>
 </head>
 
 <body>
-
-    <button onclick="voltarInicio()">Fechar menu</button>
-
-    <h2>Buscar Pessoa por CPF</h2>
-    <input type="text" id="cpfInput" placeholder="Digite o CPF" maxlength="14" oninput="formatarCPF(this)" required
-        autocomplete="off">
-    <button id="buscarBtn">Buscar</button>
-
-    <div id="resultado"></div>
+    <div class="search-container">
+        <h2>Buscar Pessoa por CPF</h2>
+        <div class="search-form">
+            <input type="text" id="cpfInput" class="search-input" placeholder="Digite o CPF" maxlength="14" oninput="formatarCPF(this)" required
+                autocomplete="off">
+            <button id="buscarBtn" class="search-button">Buscar</button>
+        </div>
+        <div id="resultado"></div>
+    </div>
 
     <script>
         $(document).ready(function () {

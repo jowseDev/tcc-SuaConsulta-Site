@@ -1,0 +1,65 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 1000px;
+}
+
+.container h1 {
+    color: #10089d;
+    margin-bottom: 20px;
+}
+
+.list-button {
+    background-color: #4021d9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+.list-button:hover {
+    background-color: #3019c5;
+}
+
+#tabela-medicos {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#tabela-medicos th,
+#tabela-medicos td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#tabela-medicos th {
+    background-color: #10089d;
+    color: white;
+}
+
+.action-icon {
+    cursor: pointer;
+    font-size: 20px;
+    margin: 0 5px;
+    transition: transform 0.2s;
+}
+
+.action-icon:hover {
+    transform: scale(1.2);
+} 

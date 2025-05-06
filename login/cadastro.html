@@ -4,104 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
+    <link rel="stylesheet" href="../css/cadastro.css">
     <script src="/js/buscarCep.js"></script>
     <script src="/js/formatador.js"></script>
-  
 </head>
 <body>
-    <h1>Cadastro de Usuário</h1>
+    <div class="cadastro-container">
+        <h1>Cadastro de Usuário</h1>
 
-    <form th:action="@{/auth/cadastro}" th:object="${usuario}" method="post">
-        <div>
-            <label for="nome">Nome:</label>
-            <input type="text" th:field="*{nome}" name="nome" required autocomplete="off"/>
-            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
-        </div>
-    
-        <div>
-            <label for="cartaosus">Cartão SUS:</label>
-            <input type="text" th:field="*{cartaosus}" name="cartaosus" maxlength="15" required autocomplete="off"/>
-            <span th:if="${#fields.hasErrors('cartaosus')}" th:errors="*{cartaosus}"></span>
-        </div>
-    
-        <div>
-            <label for="cpf">CPF:</label>
-            <input type="text" th:field="*{cpf}" name="cpf" maxlength="14" oninput="formatarCPF(this)" required autocomplete="off"/>
-            <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
-        </div>
-    
-        <div>
-            <label for="datanasc">Data de nascimento:</label>
-            <input type="date" th:field="*{datanasc}" name="datanasc"  required autocomplete="off"/>
-            <span th:if="${#fields.hasErrors('datanasc')}" th:errors="*{datanasc}"></span>
-        </div>
-    
-        <div>
-            <label for="sexo">Sexo:</label>
-            <select th:field="*{sexo}" name="sexo" required>
-                <option value="">Selecione</option>
-                <option value="M">Masculino</option>
-                <option value="F">Feminino</option>
-            </select>
-            <span th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></span>
-        </div>
-    
-        <div>
-            <label for="telefone">Telefone:</label>
-            <input type="text" th:field="*{telefone}" name="telefone"  maxlength="15" oninput="formatarTelefone(this)" required autocomplete="off"/>
-            <span th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></span>
-        </div>
-    
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" th:field="*{email}" name="email" required autocomplete="off"/>
-            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-        </div>
-    
-        <div>
-            <label for="senha">Senha:</label>
-            <input type="password" th:field="*{senha}" name="senha" required autocomplete="off"/>
-            <span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></span>
-        </div>
-    
-        <div>
-            <label for="cep">CEP:</label>
-            <input type="text" th:field="*{cep}" onblur="buscarEndereco()" name="cep" required autocomplete="off"/>
-            <span th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}"></span>
-        </div>
-    
-        <div>
-            <label for="logradouro">Logradouro:</label>
-            <input type="text" th:field="*{logradouro}" name="logradouro" required autocomplete="off"/>
-        </div>
-    
-        <div>
-            <label for="bairro">Bairro:</label>
-            <input type="text" th:field="*{bairro}" name="bairro" required autocomplete="off"/>
-        </div>
-    
-        <div>
-            <label for="localidade">Cidade:</label>
-            <input type="text" th:field="*{localidade}" name="localidade" required autocomplete="off"/>
-        </div>
-    
-        <div>
-            <label for="uf">Estado:</label>
-            <input type="text" th:field="*{uf}" name="uf" required autocomplete="off"/>
-        </div>
-    
-        <div>
-            <label for="numero">Número:</label>
-            <input type="number" th:field="*{numero}" name="numero"  required autocomplete="off"/>
-        </div>
-    
-        <div>
-            <label for="complemento">Complemento:</label>
-            <input type="text" th:field="*{complemento}" name="complemento" autocomplete="off"/>
-        </div>
-    
-        <button type="submit">CADASTRAR</button>
-    </form>
+        <form th:action="@{/auth/cadastro}" th:object="${usuario}" method="post">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" th:field="*{nome}" name="nome" required autocomplete="off"/>
+                    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error-message"></span>
+                </div>
+            
+                <div class="form-group">
+                    <label for="cartaosus">Cartão SUS:</label>
+                    <input type="text" th:field="*{cartaosus}" name="cartaosus" maxlength="15" required autocomplete="off"/>
+                    <span th:if="${#fields.hasErrors('cartaosus')}" th:errors="*{cartaosus}" class="error-message"></span>
+                </div>
+            </div>
 
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" th:field="*{cpf}" name="cpf" maxlength="14" oninput="formatarCPF(this)" required autocomplete="off"/>
+                    <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" class="error-message"></span>
+                </div>
+            
+                <div class="form-group">
+                    <label for="datanasc">Data de nascimento:</label>
+                    <input type="date" th:field="*{datanasc}" name="datanasc" required autocomplete="off"/>
+                    <span th:if="${#fields.hasErrors('datanasc')}" th:errors="*{datanasc}" class="error-message"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="sexo">Sexo:</label>
+                    <select th:field="*{sexo}" name="sexo" required>
+                        <option value="">Selecione</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                    </select>
+                    <span th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}" class="error-message"></span>
+                </div>
+            
+                <div class="form-group">
+                    <label for="telefone">Telefone:</label>
+                    <input type="text" th:field="*{telefone}" name="telefone" maxlength="15" oninput="formatarTelefone(this)" required autocomplete="off"/>
+                    <span th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="error-message"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" th:field="*{email}" name="email" required autocomplete="off"/>
+                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message"></span>
+                </div>
+            
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" th:field="*{senha}" name="senha" required autocomplete="off"/>
+                    <span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="error-message"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cep">CEP:</label>
+                    <input type="text" th:field="*{cep}" onblur="buscarEndereco()" name="cep" required autocomplete="off"/>
+                    <span th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}" class="error-message"></span>
+                </div>
+            
+                <div class="form-group">
+                    <label for="logradouro">Logradouro:</label>
+                    <input type="text" th:field="*{logradouro}" name="logradouro" required autocomplete="off"/>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="bairro">Bairro:</label>
+                    <input type="text" th:field="*{bairro}" name="bairro" required autocomplete="off"/>
+                </div>
+            
+                <div class="form-group">
+                    <label for="localidade">Cidade:</label>
+                    <input type="text" th:field="*{localidade}" name="localidade" required autocomplete="off"/>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="uf">Estado:</label>
+                    <input type="text" th:field="*{uf}" name="uf" required autocomplete="off"/>
+                </div>
+            
+                <div class="form-group">
+                    <label for="numero">Número:</label>
+                    <input type="number" th:field="*{numero}" name="numero" required autocomplete="off"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="complemento">Complemento:</label>
+                <input type="text" th:field="*{complemento}" name="complemento" autocomplete="off"/>
+            </div>
+
+            <button type="submit" class="submit-button">CADASTRAR</button>
+        </form>
+    </div>
 </body>
 </html>

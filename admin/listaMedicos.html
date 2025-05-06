@@ -4,40 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
-
-    <!--<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>-->
-
-    <script>
-        function listarAssincrono() {
-            $("#corpo").html('');
-
-            $.getJSON('http://localhost:8080/api/medico/listarMedicos', function(data) {
-                $.each(data, function(key, item) {
-                    $("#corpo").append(`
-                        <tr>
-                            <td>${item.id}</td>
-                            <td>${item.nome}</td>
-                            <td>${item.crm}</td>
-                            <td>${item.especialidade}</td>
-                            <td>🛠️</td>
-                            <td>❌</td>
-                        </tr>
-                    `);
-                });
-
-                document.getElementById("tabela-medicos").style.display = "table";
-            });
-        }
-    </script>
+    <link rel="stylesheet" href="../css/listaMedicos.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-
-    <button onclick="voltarInicio()">Fechar menu</button>
-
-    <div>
+    <div class="container">
         <h1>Lista de Médicos</h1>
-
-        <button onclick="listarAssincrono()">Listar Médicos</button>
+        <button class="list-button" onclick="listarAssincrono()">Listar Médicos</button>
 
         <table id="tabela-medicos" style="display: none;">
             <thead>
@@ -56,5 +29,27 @@
         </table>
     </div>
 
+    <script>
+        function listarAssincrono() {
+            $("#corpo").html('');
+
+            $.getJSON('http://localhost:8080/api/medico/listarMedicos', function(data) {
+                $.each(data, function(key, item) {
+                    $("#corpo").append(`
+                        <tr>
+                            <td>${item.id}</td>
+                            <td>${item.nome}</td>
+                            <td>${item.crm}</td>
+                            <td>${item.especialidade}</td>
+                            <td><span class="action-icon">🛠️</span></td>
+                            <td><span class="action-icon">❌</span></td>
+                        </tr>
+                    `);
+                });
+
+                document.getElementById("tabela-medicos").style.display = "table";
+            });
+        }
+    </script>
 </body>
 </html>

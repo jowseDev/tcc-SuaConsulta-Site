@@ -4,22 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta - ADMIN</title>
-
+    <link rel="stylesheet" href="../css/admin-home.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/formatador.js"></script>
-
 </head>
 <body>
-    
     <div id="admin-inicial">
-        <h1>Seja bem-vindo, administrador!</h1>
-        <button onclick="abrirMenuMedico()">Menu Médico</button>
-        <button onclick="abrirMenuOutro()">Menu Atendente</button>
-        <button onclick="abrirMenuOutro()">Menu Postos de saúde</button>
+        <div class="welcome-container">
+            <h1>Seja bem-vindo, administrador!</h1>
+            <div class="menu-buttons">
+                <button class="menu-button" onclick="abrirMenuMedico()">Menu Médico</button>
+                <button class="menu-button" onclick="abrirMenuOutro()">Menu Atendente</button>
+                <button class="menu-button" onclick="abrirMenuOutro()">Menu Postos de saúde</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Parte que será preenchida dinamicamente -->
     <div id="admin-content" style="display: none;"></div>
 
     <script>
@@ -63,6 +64,5 @@
             $('#admin-inicial').show();         // Mostra a tela inicial
         }
     </script>
-
 </body>
 </html>

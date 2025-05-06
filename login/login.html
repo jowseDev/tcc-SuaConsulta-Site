@@ -4,32 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
+    <link rel="stylesheet" href="../css/login.css">
     <script src="/js/redirecionar.js"></script>
     <script src="/js/formatador.js"></script>
 </head>
 <body>
-    
-    <h1>Realize seu login</h1>
-    <form th:action="@{/auth/login}" method="post">
-        
-        <label for="cpf">CPF:</label>
-        <input type="text" name="cpf" id="cpf" maxlength="14" oninput="formatarCPF(this)" required autocomplete="off">
-        <br>
-        
-        <label for="senha">Senha:</label>
-        <input type="password" name="senha" id="senha" required autocomplete="off">
+    <div class="login-container">
+        <h1>Realize seu login</h1>
+        <form th:action="@{/auth/login}" method="post">
+            <div class="form-group">
+                <label for="cpf">CPF:</label>
+                <input type="text" name="cpf" id="cpf" maxlength="14" oninput="formatarCPF(this)" required autocomplete="off">
+            </div>
+            
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha" required autocomplete="off">
+            </div>
 
-        <div th:if="${erroLogin}" style="color: red;">
-            <p th:text="${erroLogin}"></p>
+            <div th:if="${erroLogin}" class="error-message">
+                <p th:text="${erroLogin}"></p>
+            </div>
+            
+            <button type="submit" class="submit-button">Entrar</button>
+        </form>
+        
+        <div class="register-link">
+            <h4>Não possui cadastro?</h4>
+            <button onclick="registrar()" class="register-button">Cadastre-se</button>
         </div>
-        
-        <button type="submit">Entrar</button>
-        
-    </form>
-    
-    <h4>Não possui cadastro?</h4>
-    <button onclick="registrar()">Cadastre-se</button>
-
-    
+    </div>
 </body>
 </html>
