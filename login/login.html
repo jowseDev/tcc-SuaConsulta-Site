@@ -1,38 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sua Consulta</title>
-    <link rel="stylesheet" href="../css/login.css">
-    <script src="/js/redirecionar.js"></script>
-    <script src="/js/formatador.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sua Consulta - Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/js/formatador.js"></script>
 </head>
-<body>
-    <div class="login-container">
-        <h1>Realize seu login</h1>
-        <form th:action="@{/auth/login}" method="post">
-            <div class="form-group">
-                <label for="cpf">CPF:</label>
-                <input type="text" name="cpf" id="cpf" maxlength="14" oninput="formatarCPF(this)" required autocomplete="off">
-            </div>
-            
-            <div class="form-group">
-                <label for="senha">Senha:</label>
-                <input type="password" name="senha" id="senha" required autocomplete="off">
-            </div>
-
-            <div th:if="${erroLogin}" class="error-message">
-                <p th:text="${erroLogin}"></p>
-            </div>
-            
-            <button type="submit" class="submit-button">Entrar</button>
-        </form>
-        
-        <div class="register-link">
-            <h4>Não possui cadastro?</h4>
-            <button onclick="registrar()" class="register-button">Cadastre-se</button>
-        </div>
+<body class="min-h-screen bg-white flex items-center justify-center px-4">
+  <div class="w-full max-w-md space-y-8">
+    <div class="text-center">
+      <!-- Logo -->
+      <img src="../images/suaConsultaLogo.png" alt="Logo" class="mx-auto h-24 w-auto" />
+      <h2 class="mt-6 text-center text-2xl font-bold text-gray-900">Entrar na sua conta</h2>
     </div>
+
+    <form class="mt-8 space-y-8" th:action="@{/auth/login}" method="post">
+      <div class="rounded-md shadow-sm space-y-6">
+        <!-- CPF -->
+        <div>
+          <label for="cpf" class="block text-sm font-medium text-gray-700">CPF</label>
+          <input id="cpf" name="cpf" type="text" maxlength="14" oninput="formatarCPF(this)" required autocomplete="off"
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+        </div>
+
+        <!-- Senha -->
+        <div>
+          <div class="flex items-center justify-between">
+            <label for="senha" class="block text-sm font-medium text-gray-700">Senha</label>
+            <a href="#" class="text-sm text-violet-600 hover:text-violet-500">Esqueceu a senha?</a>
+          </div>
+          <input id="senha" name="senha" type="password" required autocomplete="off"
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+        </div>
+      </div>
+
+      <!-- Erro -->
+      <div th:if="${erroLogin}" class="text-red-600 text-sm">
+        <p th:text="${erroLogin}"></p>
+      </div>
+
+      <!-- Botão -->
+      <div>
+        <button type="submit"
+          class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500">
+          Entrar
+        </button>
+      </div>
+    </form>
+
+    <!-- Link de registro -->
+    <p class="mt-4 text-center text-sm text-gray-600">
+      Não possui conta?
+      <a href="#" onclick="registrar()" class="font-medium text-violet-600 hover:text-violet-500">
+        Cadastrar-se
+      </a>
+    </p>
+
+    <!-- Frase do pensador -->
+    <p class="mt-8 text-center text-sm italic text-gray-700">
+      "A saúde é o maior bem que podemos ter. Cuide dela com carinho e atenção."
+      <br>
+      <span class="text-gray-600">— Hipócrates</span>
+    </p>
+  </div>
 </body>
 </html>
