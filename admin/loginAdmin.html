@@ -3,47 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sua Consulta - ADMIN</title>
-    <link rel="stylesheet" href="../css/loginAdmin.css">
+    <title>Sua Consulta - Login Administrador</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/formatador.js"></script>
 </head>
-<body>
-    <div class="login-container">
-        <h1>Realize seu login Administrador</h1>
-        <form th:action="@{/auth/admin/}" method="post">
-            <div class="form-group">
-                <label for="login">Login:</label>
-                <input type="text" name="login" id="login" required autocomplete="off">
-            </div>
-            
-            <div class="form-group">
-                <label for="senha">Senha:</label>
-                <div class="password-container">
-                    <input type="password" name="senha" id="senha" required autocomplete="off">
-                    <button type="button" class="password-toggle"
-                        onmousedown="mostrarSenha()"
-                        onmouseup="ocultarSenha()"
-                        onmouseleave="ocultarSenha()">
-                        👁️
-                    </button>
+<body class="min-h-screen bg-white flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-md space-y-12">
+        <div class="text-center">
+            <!-- Logo -->
+            <img src="../images/suaConsultaLogo.png" alt="Logo" class="mx-auto h-28 w-auto" />
+            <h2 class="mt-8 text-center text-2xl font-bold text-gray-900">Área do Administrador</h2>
+        </div>
+
+        <form class="mt-12 space-y-10" th:action="@{/auth/admin/login}" method="post">
+            <div class="rounded-md shadow-sm -space-y-px">
+                <!-- CPF -->
+                <div>
+                    <label for="cpf" class="block text-sm font-medium text-gray-700">CPF</label>
+                    <input id="cpf" name="cpf" type="text" maxlength="14" oninput="formatarCPF(this)" required autocomplete="off"
+                        class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+                </div>
+
+                <!-- Senha -->
+                <div class="mt-4">
+                    <div class="flex items-center justify-between">
+                        <label for="senha" class="block text-sm font-medium text-gray-700">Senha</label>
+                        <a href="#" class="text-sm text-violet-600 hover:text-violet-500">Esqueceu a senha?</a>
+                    </div>
+                    <input id="senha" name="senha" type="password" required autocomplete="off"
+                        class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
                 </div>
             </div>
 
-            <div th:if="${erroLogin}" class="error-message">
+            <!-- Erro -->
+            <div th:if="${erroLogin}" class="text-red-600 text-sm">
                 <p th:text="${erroLogin}"></p>
             </div>
-            
-            <button type="submit" class="submit-button">Entrar</button>
-        </form>
-    </div>
 
-    <script>
-        function mostrarSenha() {
-            document.getElementById("senha").type = "text";
-        }
-    
-        function ocultarSenha() {
-            document.getElementById("senha").type = "password";
-        }
-    </script>
+            <!-- Botão -->
+            <div>
+                <button type="submit"
+                    class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500">
+                    Entrar
+                </button>
+            </div>
+        </form>
+
+        <!-- Link de retorno -->
+        <p class="mt-4 text-center text-sm text-gray-600">
+            <a href="/" class="font-medium text-violet-600 hover:text-violet-500">
+                Voltar para a página inicial
+            </a>
+        </p>
+
+        <!-- Frase do pensador -->
+        <p class="mt-8 text-center text-sm italic text-gray-700">
+            "A saúde não é apenas um estado do corpo, mas do espírito."
+            <br>
+            <span class="text-gray-600">— Sêneca</span>
+        </p>
+    </div>
 </body>
 </html>

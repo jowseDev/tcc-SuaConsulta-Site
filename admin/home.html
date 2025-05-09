@@ -4,33 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta - ADMIN</title>
-    <link rel="stylesheet" href="../css/admin-home.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/formatador.js"></script>
 </head>
-<body>
-    <div id="admin-inicial">
-        <div class="welcome-container">
-            <h1>Seja bem-vindo, administrador!</h1>
-            <div class="menu-buttons">
-                <button class="menu-button" onclick="abrirMenuMedico()">Menu Médico</button>
-                <button class="menu-button" onclick="abrirMenuOutro()">Menu Atendente</button>
-                <button class="menu-button" onclick="abrirMenuOutro()">Menu Postos de saúde</button>
+<body class="min-h-screen bg-gray-50">
+    <div class="flex h-screen">
+        <!-- Barra Lateral -->
+        <div class="w-64 bg-blue-800 text-white">
+            <div class="p-4">
+                <img src="../images/suaConsultaLogo.png" alt="Logo" class="h-12 w-auto mx-auto" />
             </div>
+            <nav class="mt-8">
+                <button onclick="abrirMenuMedico()" class="w-full text-left py-3 px-4 hover:bg-blue-900 transition-colors">
+                    Menu Médico
+                </button>
+                <button onclick="abrirMenuOutro()" class="w-full text-left py-3 px-4 hover:bg-blue-900 transition-colors">
+                    Menu Atendente
+                </button>
+                <button onclick="abrirMenuOutro()" class="w-full text-left py-3 px-4 hover:bg-blue-900 transition-colors">
+                    Menu Postos de saúde
+                </button>
+                <a href="/auth/logout" class="block py-3 px-4 hover:bg-blue-900 transition-colors mt-auto">
+                    Sair
+                </a>
+            </nav>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="flex-1">
+            <div id="admin-inicial" class="h-full flex items-center justify-center">
+                <div class="text-center">
+                    <h1 class="text-3xl font-bold text-gray-800 mb-8">Seja bem-vindo, administrador!</h1>
+                </div>
+            </div>
+
+            <div id="admin-content" class="h-full p-6" style="display: none;"></div>
         </div>
     </div>
-
-    <div id="admin-content" style="display: none;"></div>
 
     <script>
         function abrirMenuMedico() {
             Swal.fire({
                 title: 'Menu Médico',
                 icon: 'info',
-                //imageUrl: '/imgs/medico.png',
-               // imageWidth: 100,
-                //imageHeight: 100,
                 showCancelButton: true,
                 confirmButtonText: 'Listar Médicos',
                 cancelButtonText: 'Cadastrar Médico',
@@ -50,8 +68,8 @@
                 url,
                 type: 'GET',
                 success: function (html) {
-                    $('#admin-inicial').hide();           // Oculta a parte inicial
-                    $('#admin-content').html(html).show(); // Mostra o conteúdo do menu
+                    $('#admin-inicial').hide();
+                    $('#admin-content').html(html).show();
                 },
                 error: function () {
                     Swal.fire('Erro', 'Não foi possível carregar o conteúdo.', 'error');
@@ -60,8 +78,8 @@
         }
 
         function voltarInicio() {
-            $('#admin-content').hide().empty(); // Esconde e limpa o conteúdo atual
-            $('#admin-inicial').show();         // Mostra a tela inicial
+            $('#admin-content').hide().empty();
+            $('#admin-inicial').show();
         }
     </script>
 </body>
