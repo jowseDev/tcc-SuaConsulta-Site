@@ -7,6 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="/js/formatador.js"></script>
   <script src="/js/buscarCep.js"></script>
+  <link rel="stylesheet" href="../css/cadastro.css">
   <style>
     body {
       background-color: #ffffff;
@@ -62,56 +63,56 @@
 </head>
 <body class="min-h-screen bg-white flex items-center justify-center px-4 py-8 transition-colors duration-200">
   <!-- Botão de modo escuro -->
-  <button id="darkModeToggle" class="fixed bottom-4 left-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors duration-200">
+  <button id="darkModeToggle" class="fixed bottom-4 left-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors duration-200 hover:scale-110">
     🌙
   </button>
 
-  <div class="w-full max-w-md max-h-[90vh] overflow-y-auto space-y-8">
+  <div class="w-full max-w-md max-h-[90vh] overflow-y-auto space-y-8 animate-fade-in">
     <div class="text-center">
       <!-- Logo -->
-      <img src="../images/suaConsultaLogo.png" alt="Logo" class="mx-auto h-24 w-auto" />
+      <img src="../images/suaConsultaLogo.png" alt="Logo" class="mx-auto h-24 w-auto hover-scale" />
       <h2 class="mt-6 text-center text-2xl font-bold text-gray-900">Criar nova conta</h2>
     </div>
 
     <form class="mt-8 space-y-8" th:action="@{/auth/cadastro}" th:object="${usuario}" method="post">
       <div class="rounded-md shadow-sm space-y-6">
         <!-- Nome Completo -->
-        <div>
+        <div class="animate-slide-up">
           <label for="nome" class="block text-sm font-medium text-gray-700">Nome Completo</label>
           <input id="nome" name="nome" type="text" th:field="*{nome}" required autocomplete="off"
-            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
           <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-red-600 text-sm"></span>
         </div>
 
         <!-- Cartão SUS -->
-        <div>
+        <div class="animate-slide-up">
           <label for="cartaosus" class="block text-sm font-medium text-gray-700">Cartão SUS</label>
           <input id="cartaosus" name="cartaosus" type="text" th:field="*{cartaosus}" maxlength="15" required autocomplete="off"
-            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
           <span th:if="${#fields.hasErrors('cartaosus')}" th:errors="*{cartaosus}" class="text-red-600 text-sm"></span>
         </div>
 
         <!-- CPF -->
-        <div>
+        <div class="animate-slide-up">
           <label for="cpf" class="block text-sm font-medium text-gray-700">CPF</label>
           <input id="cpf" name="cpf" type="text" th:field="*{cpf}" maxlength="14" oninput="formatarCPF(this)" required autocomplete="off"
-            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
           <span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" class="text-red-600 text-sm"></span>
         </div>
 
         <!-- Data de Nascimento -->
-        <div>
+        <div class="animate-slide-up">
           <label for="datanasc" class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
           <input id="datanasc" name="datanasc" type="date" th:field="*{datanasc}" required autocomplete="off"
-            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
           <span th:if="${#fields.hasErrors('datanasc')}" th:errors="*{datanasc}" class="text-red-600 text-sm"></span>
         </div>
 
         <!-- Sexo -->
-        <div>
+        <div class="animate-slide-up">
           <label for="sexo" class="block text-sm font-medium text-gray-700">Sexo</label>
           <select id="sexo" name="sexo" th:field="*{sexo}" required
-            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
             <option value="">Selecione</option>
             <option value="M">Masculino</option>
             <option value="F">Feminino</option>
@@ -120,83 +121,83 @@
         </div>
 
         <!-- Telefone -->
-        <div>
+        <div class="animate-slide-up">
           <label for="telefone" class="block text-sm font-medium text-gray-700">Telefone</label>
           <input id="telefone" name="telefone" type="tel" th:field="*{telefone}" maxlength="15" oninput="formatarTelefone(this)" required autocomplete="off"
-            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400"
             placeholder="(00)00000-0000">
           <span th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="text-red-600 text-sm"></span>
         </div>
 
         <!-- Email -->
-        <div>
+        <div class="animate-slide-up">
           <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
           <input id="email" name="email" type="email" th:field="*{email}" required autocomplete="off"
-            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
           <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-red-600 text-sm"></span>
         </div>
 
         <!-- Senha -->
-        <div>
+        <div class="animate-slide-up">
           <label for="senha" class="block text-sm font-medium text-gray-700">Senha</label>
           <input id="senha" name="senha" type="password" th:field="*{senha}" required autocomplete="off"
-            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
           <span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="text-red-600 text-sm"></span>
         </div>
 
         <!-- CEP -->
-        <div>
+        <div class="animate-slide-up">
           <label for="cep" class="block text-sm font-medium text-gray-700">CEP</label>
           <input id="cep" name="cep" type="text" th:field="*{cep}" onblur="buscarEndereco()" required autocomplete="off"
-            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
           <span th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}" class="text-red-600 text-sm"></span>
         </div>
 
         <!-- Logradouro -->
-        <div>
+        <div class="animate-slide-up">
           <label for="logradouro" class="block text-sm font-medium text-gray-700">Logradouro</label>
           <input id="logradouro" name="logradouro" type="text" th:field="*{logradouro}" required autocomplete="off"
-            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
           <span th:if="${#fields.hasErrors('logradouro')}" th:errors="*{logradouro}" class="text-red-600 text-sm"></span>
         </div>
 
         <!-- Bairro -->
-        <div>
+        <div class="animate-slide-up">
           <label for="bairro" class="block text-sm font-medium text-gray-700">Bairro</label>
           <input id="bairro" name="bairro" type="text" th:field="*{bairro}" required autocomplete="off"
-            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
           <span th:if="${#fields.hasErrors('bairro')}" th:errors="*{bairro}" class="text-red-600 text-sm"></span>
         </div>
 
         <!-- Cidade -->
-        <div>
+        <div class="animate-slide-up">
           <label for="localidade" class="block text-sm font-medium text-gray-700">Cidade</label>
           <input id="localidade" name="localidade" type="text" th:field="*{localidade}" required autocomplete="off"
-            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
           <span th:if="${#fields.hasErrors('localidade')}" th:errors="*{localidade}" class="text-red-600 text-sm"></span>
         </div>
 
         <!-- Estado -->
-        <div>
+        <div class="animate-slide-up">
           <label for="uf" class="block text-sm font-medium text-gray-700">Estado</label>
           <input id="uf" name="uf" type="text" th:field="*{uf}" required autocomplete="off"
-            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
           <span th:if="${#fields.hasErrors('uf')}" th:errors="*{uf}" class="text-red-600 text-sm"></span>
         </div>
 
         <!-- Número -->
-        <div>
+        <div class="animate-slide-up">
           <label for="numero" class="block text-sm font-medium text-gray-700">Número</label>
           <input id="numero" name="numero" type="number" th:field="*{numero}" required autocomplete="off"
-            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
           <span th:if="${#fields.hasErrors('numero')}" th:errors="*{numero}" class="text-red-600 text-sm"></span>
         </div>
 
         <!-- Complemento -->
-        <div>
+        <div class="animate-slide-up">
           <label for="complemento" class="block text-sm font-medium text-gray-700">Complemento</label>
           <input id="complemento" name="complemento" type="text" th:field="*{complemento}" autocomplete="off"
-            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm">
+            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
           <span th:if="${#fields.hasErrors('complemento')}" th:errors="*{complemento}" class="text-red-600 text-sm"></span>
         </div>
       </div>
@@ -209,7 +210,7 @@
       <!-- Botão -->
       <div>
         <button type="submit"
-          class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500">
+          class="button-primary w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500">
           Cadastrar
         </button>
       </div>
@@ -218,7 +219,7 @@
     <!-- Link de login -->
     <p class="mt-4 text-center text-sm text-gray-600">
       Já possui conta?
-      <a href="#" onclick="login()" class="font-medium text-violet-600 hover:text-violet-500">
+      <a href="#" onclick="login()" class="font-medium text-violet-600 hover:text-violet-500 transition-colors duration-200">
         Fazer login
       </a>
     </p>

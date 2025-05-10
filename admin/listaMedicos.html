@@ -4,52 +4,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
-    <link rel="stylesheet" href="../css/listaMedicos.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        .dark-mode {
+            background-color: #1a1b1e !important;
+            color: white !important;
+        }
+        .dark-mode .text-gray-900 {
+            color: white !important;
+        }
+        .dark-mode .bg-white {
+            background-color: #2d2e32 !important;
+        }
+        .dark-mode .bg-gray-50 {
+            background-color: #1a1b1e !important;
+        }
+        .dark-mode .divide-gray-200 {
+            border-color: #4b4c52 !important;
+        }
+        .dark-mode .text-gray-500 {
+            color: #9ca3af !important;
+        }
+        .dark-mode .hover\:bg-gray-50:hover {
+            background-color: #2d2e32 !important;
+        }
+        .dark-mode .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3) !important;
+        }
+        .dark-mode .rounded-lg {
+            border-color: #4b4c52 !important;
+        }
+        .dark-mode .button-primary {
+            background-color: #3019c5 !important;
+            color: white !important;
+        }
+        .dark-mode .button-primary:hover {
+            background-color: #000089 !important;
+        }
+        .dark-mode .text-red-600 {
+            color: #ef4444 !important;
+        }
+        .dark-mode .text-orange-600 {
+            color: #ea580c !important;
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Lista de Médicos</h1>
-        <button class="list-button" onclick="listarAssincrono()">Listar Médicos</button>
+<body class="min-h-screen bg-white transition-colors duration-200">
+    <!-- Botão de modo escuro -->
+    <button id="darkModeToggle" class="fixed bottom-4 left-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors duration-200 hover:scale-110">
+        🌙
+    </button>
 
-        <table id="tabela-medicos" style="display: none;">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Pessoa</th>
-                    <th>CRM</th>
-                    <th>Especialidade</th>
-                    <th>Alterar</th>
-                    <th>Excluir</th>
-                </tr>
-            </thead>
-            <tbody id="corpo">
-                <!-- Dados carregados via JS -->
-            </tbody>
-        </table>
+    <div class="container mx-auto px-4 py-8 animate-fade-in">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Lista de Médicos</h1>
+            <button onclick="listarAssincrono()" class="button-primary px-6 py-2 rounded-md">
+                Listar Médicos
+            </button>
+        </div>
+
+        <div id="tabelaMedicos" class="hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pessoa</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CRM</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Especialidade</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200" id="corpoTabela">
+                    <!-- Os dados serão inseridos aqui via JavaScript -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>
         function listarAssincrono() {
-            $("#corpo").html('');
+            $.ajax({
+                url: 'http://localhost:8080/api/medico/listarMedicos',
+                type: 'GET',
+                success: function (medicos) {
+                    const corpoTabela = $('#corpoTabela');
+                    corpoTabela.empty();
 
-            $.getJSON('http://localhost:8080/api/medico/listarMedicos', function(data) {
-                $.each(data, function(key, item) {
-                    $("#corpo").append(`
-                        <tr>
-                            <td>${item.id}</td>
-                            <td>${item.nome}</td>
-                            <td>${item.crm}</td>
-                            <td>${item.especialidade}</td>
-                            <td><span class="action-icon">🛠️</span></td>
-                            <td><span class="action-icon">❌</span></td>
-                        </tr>
-                    `);
-                });
+                    medicos.forEach(medico => {
+                        corpoTabela.append(`
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${medico.id}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${medico.pessoa.nome}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${medico.crm}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${medico.especialidade}</td>
+                            </tr>
+                        `);
+                    });
 
-                document.getElementById("tabela-medicos").style.display = "table";
+                    $('#tabelaMedicos').removeClass('hidden');
+                },
+                error: function () {
+                    alert('Erro ao buscar médicos');
+                }
             });
         }
+
+        // Script do modo escuro
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        // Verifica se há uma preferência salva
+        const darkMode = localStorage.getItem('darkMode');
+        if (darkMode === 'enabled') {
+            body.classList.add('dark-mode');
+            darkModeToggle.textContent = '☀️';
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+                darkModeToggle.textContent = '☀️';
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                darkModeToggle.textContent = '🌙';
+            }
+        });
     </script>
 </body>
 </html>
