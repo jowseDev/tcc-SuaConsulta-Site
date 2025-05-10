@@ -6,8 +6,55 @@
     <title>Sua Consulta - Login Administrador</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/js/formatador.js"></script>
+    <style>
+        body {
+            background-color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+        .dark-mode {
+            background-color: #1a1b1e !important;
+            color: #ffffff;
+        }
+        .dark-mode .text-gray-900 {
+            color: #ffffff !important;
+        }
+        .dark-mode .text-gray-700 {
+            color: #e5e7eb !important;
+        }
+        .dark-mode .text-gray-600 {
+            color: #d1d5db !important;
+        }
+        .dark-mode input {
+            background-color: #2d2e32 !important;
+            border-color: #4b5563 !important;
+            color: #ffffff !important;
+        }
+        .dark-mode input::placeholder {
+            color: #9ca3af !important;
+        }
+        .dark-mode .border-gray-300 {
+            border-color: #4b5563 !important;
+        }
+        .dark-mode .bg-white {
+            background-color: #1a1b1e !important;
+        }
+        .dark-mode .hover\:bg-violet-700:hover {
+            background-color: #7c3aed !important;
+        }
+        .dark-mode .text-violet-600 {
+            color: #a78bfa !important;
+        }
+        .dark-mode .hover\:text-violet-500:hover {
+            color: #c4b5fd !important;
+        }
+    </style>
 </head>
-<body class="min-h-screen bg-white flex items-center justify-center px-4 py-12">
+<body class="min-h-screen bg-white flex items-center justify-center px-4 py-12 transition-colors duration-200">
+    <!-- Botão de modo escuro -->
+    <button id="darkModeToggle" class="fixed bottom-4 left-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors duration-200">
+        🌙
+    </button>
+
     <div class="w-full max-w-md space-y-12">
         <div class="text-center">
             <!-- Logo -->
@@ -16,7 +63,7 @@
         </div>
 
         <form class="mt-12 space-y-10" th:action="@{/auth/admin/login}" method="post">
-            <div class="rounded-md shadow-sm -space-y-px">
+            <div class="rounded-md shadow-sm space-y-6">
                 <!-- CPF -->
                 <div>
                     <label for="cpf" class="block text-sm font-medium text-gray-700">CPF</label>
@@ -25,7 +72,7 @@
                 </div>
 
                 <!-- Senha -->
-                <div class="mt-4">
+                <div>
                     <div class="flex items-center justify-between">
                         <label for="senha" class="block text-sm font-medium text-gray-700">Senha</label>
                         <a href="#" class="text-sm text-violet-600 hover:text-violet-500">Esqueceu a senha?</a>
@@ -63,5 +110,28 @@
             <span class="text-gray-600">— Sêneca</span>
         </p>
     </div>
+
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        // Verifica se há uma preferência salva
+        const darkMode = localStorage.getItem('darkMode');
+        if (darkMode === 'enabled') {
+            body.classList.add('dark-mode');
+            darkModeToggle.textContent = '☀️';
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+                darkModeToggle.textContent = '☀️';
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                darkModeToggle.textContent = '🌙';
+            }
+        });
+    </script>
 </body>
 </html>

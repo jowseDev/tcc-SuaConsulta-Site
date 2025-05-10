@@ -7,6 +7,48 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="/js/formatador.js"></script>
   <script src="/js/buscarCep.js"></script>
+  <style>
+    body {
+      background-color: #ffffff;
+      transition: background-color 0.3s ease;
+    }
+    .dark-mode {
+      background-color: #1a1b1e !important;
+      color: #ffffff;
+    }
+    .dark-mode .text-gray-900 {
+      color: #ffffff !important;
+    }
+    .dark-mode .text-gray-700 {
+      color: #e5e7eb !important;
+    }
+    .dark-mode .text-gray-600 {
+      color: #d1d5db !important;
+    }
+    .dark-mode input, .dark-mode select {
+      background-color: #2d2e32 !important;
+      border-color: #4b5563 !important;
+      color: #ffffff !important;
+    }
+    .dark-mode input::placeholder {
+      color: #9ca3af !important;
+    }
+    .dark-mode .border-gray-300 {
+      border-color: #4b5563 !important;
+    }
+    .dark-mode .bg-white {
+      background-color: #1a1b1e !important;
+    }
+    .dark-mode .hover\:bg-violet-700:hover {
+      background-color: #7c3aed !important;
+    }
+    .dark-mode .text-violet-600 {
+      color: #a78bfa !important;
+    }
+    .dark-mode .hover\:text-violet-500:hover {
+      color: #c4b5fd !important;
+    }
+  </style>
   <script>
     function formatarTelefone(input) {
       let value = input.value.replace(/\D/g, '');
@@ -18,7 +60,12 @@
     }
   </script>
 </head>
-<body class="min-h-screen bg-white flex items-center justify-center px-4 py-8">
+<body class="min-h-screen bg-white flex items-center justify-center px-4 py-8 transition-colors duration-200">
+  <!-- Botão de modo escuro -->
+  <button id="darkModeToggle" class="fixed bottom-4 left-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors duration-200">
+    🌙
+  </button>
+
   <div class="w-full max-w-md max-h-[90vh] overflow-y-auto space-y-8">
     <div class="text-center">
       <!-- Logo -->
@@ -183,5 +230,28 @@
       <span class="text-gray-600">— Lair Ribeiro</span>
     </p>
   </div>
+
+  <script>
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+    
+    // Verifica se há uma preferência salva
+    const darkMode = localStorage.getItem('darkMode');
+    if (darkMode === 'enabled') {
+      body.classList.add('dark-mode');
+      darkModeToggle.textContent = '☀️';
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'enabled');
+        darkModeToggle.textContent = '☀️';
+      } else {
+        localStorage.setItem('darkMode', 'disabled');
+        darkModeToggle.textContent = '🌙';
+      }
+    });
+  </script>
 </body>
 </html>

@@ -8,8 +8,38 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/formatador.js"></script>
+    <style>
+        body {
+            background-color: #f9fafb;
+            transition: background-color 0.3s ease;
+        }
+        .dark-mode {
+            background-color: #1a1b1e !important;
+            color: #ffffff;
+        }
+        .dark-mode .text-gray-800 {
+            color: #ffffff !important;
+        }
+        .dark-mode .bg-gray-50 {
+            background-color: #1a1b1e !important;
+        }
+        .dark-mode .bg-blue-800 {
+            background-color: #1e40af !important;
+        }
+        .dark-mode .hover\:bg-blue-900:hover {
+            background-color: #1e3a8a !important;
+        }
+        .dark-mode .text-white {
+            color: #ffffff !important;
+        }
+    </style>
 </head>
-<body class="min-h-screen bg-gray-50">
+<body class="min-h-screen bg-gray-50 transition-colors duration-200">
+    <!-- Botão de modo escuro -->
+    <button id="darkModeToggle" class="fixed bottom-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors duration-200">
+        🌙
+    </button>
+
     <div class="flex h-screen">
         <!-- Barra Lateral -->
         <div class="w-64 bg-blue-800 text-white">
@@ -32,7 +62,6 @@
             </nav>
         </div>
 
-        <!-- Conteúdo Principal -->
         <div class="flex-1">
             <div id="admin-inicial" class="h-full flex items-center justify-center">
                 <div class="text-center">
@@ -45,6 +74,27 @@
     </div>
 
     <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        // Verifica se há uma preferência salva
+        const darkMode = localStorage.getItem('darkMode');
+        if (darkMode === 'enabled') {
+            body.classList.add('dark-mode');
+            darkModeToggle.textContent = '☀️';
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+                darkModeToggle.textContent = '☀️';
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                darkModeToggle.textContent = '🌙';
+            }
+        });
+
         function abrirMenuMedico() {
             Swal.fire({
                 title: 'Menu Médico',
