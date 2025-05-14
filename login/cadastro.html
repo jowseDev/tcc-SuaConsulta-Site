@@ -5,61 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sua Consulta - Cadastro</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="/js/formatador.js"></script>
   <script src="/js/buscarCep.js"></script>
   <link rel="stylesheet" href="../css/cadastro.css">
-  <style>
-    body {
-      background-color: #ffffff;
-      transition: background-color 0.3s ease;
-    }
-    .dark-mode {
-      background-color: #1a1b1e !important;
-      color: #ffffff;
-    }
-    .dark-mode .text-gray-900 {
-      color: #ffffff !important;
-    }
-    .dark-mode .text-gray-700 {
-      color: #e5e7eb !important;
-    }
-    .dark-mode .text-gray-600 {
-      color: #d1d5db !important;
-    }
-    .dark-mode input, .dark-mode select {
-      background-color: #2d2e32 !important;
-      border-color: #4b5563 !important;
-      color: #ffffff !important;
-    }
-    .dark-mode input::placeholder {
-      color: #9ca3af !important;
-    }
-    .dark-mode .border-gray-300 {
-      border-color: #4b5563 !important;
-    }
-    .dark-mode .bg-white {
-      background-color: #1a1b1e !important;
-    }
-    .dark-mode .hover\:bg-violet-700:hover {
-      background-color: #7c3aed !important;
-    }
-    .dark-mode .text-violet-600 {
-      color: #a78bfa !important;
-    }
-    .dark-mode .hover\:text-violet-500:hover {
-      color: #c4b5fd !important;
-    }
-  </style>
-  <script>
-    function formatarTelefone(input) {
-      let value = input.value.replace(/\D/g, '');
-      if (value.length <= 11) {
-        value = value.replace(/^(\d{2})(\d)/g, '($1)$2');
-        value = value.replace(/(\d)(\d{4})$/, '$1-$2');
-      }
-      input.value = value;
-    }
-  </script>
 </head>
 <body class="min-h-screen bg-white flex items-center justify-center px-4 py-8 transition-colors duration-200">
   <!-- Botão de modo escuro -->
@@ -67,17 +17,17 @@
     🌙
   </button>
 
-  <div class="w-full max-w-md max-h-[90vh] overflow-y-auto space-y-8 animate-fade-in">
+  <div class="w-full max-w-md space-y-8 animate-fade-in">
     <div class="text-center">
       <!-- Logo -->
-      <img src="../images/suaConsultaLogo.png" alt="Logo" class="mx-auto h-24 w-auto hover-scale" />
-      <h2 class="mt-6 text-center text-2xl font-bold text-gray-900">Criar nova conta</h2>
+      <img src="../images/suaConsultaLogo.png" alt="Logo" class="mx-auto h-20 w-auto hover-scale" />
+      <h2 class="mt-4 text-center text-2xl font-bold text-gray-900">Criar nova conta</h2>
     </div>
 
-    <form class="mt-8 space-y-8" th:action="@{/auth/cadastro}" th:object="${usuario}" method="post">
+    <form class="mt-8 space-y-8 form-container" th:action="@{/auth/cadastro}" th:object="${usuario}" method="post">
       <div class="rounded-md shadow-sm space-y-6">
         <!-- Nome Completo -->
-        <div class="animate-slide-up">
+        <div class="form-field animate-slide-up">
           <label for="nome" class="block text-sm font-medium text-gray-700">Nome Completo</label>
           <input id="nome" name="nome" type="text" th:field="*{nome}" required autocomplete="off"
             class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
@@ -85,7 +35,7 @@
         </div>
 
         <!-- Cartão SUS -->
-        <div class="animate-slide-up">
+        <div class="form-field animate-slide-up">
           <label for="cartaosus" class="block text-sm font-medium text-gray-700">Cartão SUS</label>
           <input id="cartaosus" name="cartaosus" type="text" th:field="*{cartaosus}" maxlength="15" required autocomplete="off"
             class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
@@ -93,7 +43,7 @@
         </div>
 
         <!-- CPF -->
-        <div class="animate-slide-up">
+        <div class="form-field animate-slide-up">
           <label for="cpf" class="block text-sm font-medium text-gray-700">CPF</label>
           <input id="cpf" name="cpf" type="text" th:field="*{cpf}" maxlength="14" oninput="formatarCPF(this)" required autocomplete="off"
             class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
@@ -101,7 +51,7 @@
         </div>
 
         <!-- Data de Nascimento -->
-        <div class="animate-slide-up">
+        <div class="form-field animate-slide-up">
           <label for="datanasc" class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
           <input id="datanasc" name="datanasc" type="date" th:field="*{datanasc}" required autocomplete="off"
             class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
@@ -109,7 +59,7 @@
         </div>
 
         <!-- Sexo -->
-        <div class="animate-slide-up">
+        <div class="form-field animate-slide-up">
           <label for="sexo" class="block text-sm font-medium text-gray-700">Sexo</label>
           <select id="sexo" name="sexo" th:field="*{sexo}" required
             class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
@@ -121,7 +71,7 @@
         </div>
 
         <!-- Telefone -->
-        <div class="animate-slide-up">
+        <div class="form-field animate-slide-up">
           <label for="telefone" class="block text-sm font-medium text-gray-700">Telefone</label>
           <input id="telefone" name="telefone" type="tel" th:field="*{telefone}" maxlength="15" oninput="formatarTelefone(this)" required autocomplete="off"
             class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400"
@@ -130,7 +80,7 @@
         </div>
 
         <!-- Email -->
-        <div class="animate-slide-up">
+        <div class="form-field animate-slide-up">
           <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
           <input id="email" name="email" type="email" th:field="*{email}" required autocomplete="off"
             class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
@@ -138,7 +88,7 @@
         </div>
 
         <!-- Senha -->
-        <div class="animate-slide-up">
+        <div class="form-field animate-slide-up">
           <label for="senha" class="block text-sm font-medium text-gray-700">Senha</label>
           <input id="senha" name="senha" type="password" th:field="*{senha}" required autocomplete="off"
             class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
@@ -146,7 +96,7 @@
         </div>
 
         <!-- CEP -->
-        <div class="animate-slide-up">
+        <div class="form-field animate-slide-up">
           <label for="cep" class="block text-sm font-medium text-gray-700">CEP</label>
           <input id="cep" name="cep" type="text" th:field="*{cep}" onblur="buscarEndereco()" required autocomplete="off"
             class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
@@ -154,7 +104,7 @@
         </div>
 
         <!-- Logradouro -->
-        <div class="animate-slide-up">
+        <div class="form-field animate-slide-up">
           <label for="logradouro" class="block text-sm font-medium text-gray-700">Logradouro</label>
           <input id="logradouro" name="logradouro" type="text" th:field="*{logradouro}" required autocomplete="off"
             class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
@@ -162,7 +112,7 @@
         </div>
 
         <!-- Bairro -->
-        <div class="animate-slide-up">
+        <div class="form-field animate-slide-up">
           <label for="bairro" class="block text-sm font-medium text-gray-700">Bairro</label>
           <input id="bairro" name="bairro" type="text" th:field="*{bairro}" required autocomplete="off"
             class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
@@ -170,7 +120,7 @@
         </div>
 
         <!-- Cidade -->
-        <div class="animate-slide-up">
+        <div class="form-field animate-slide-up">
           <label for="localidade" class="block text-sm font-medium text-gray-700">Cidade</label>
           <input id="localidade" name="localidade" type="text" th:field="*{localidade}" required autocomplete="off"
             class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
@@ -178,7 +128,7 @@
         </div>
 
         <!-- Estado -->
-        <div class="animate-slide-up">
+        <div class="form-field animate-slide-up">
           <label for="uf" class="block text-sm font-medium text-gray-700">Estado</label>
           <input id="uf" name="uf" type="text" th:field="*{uf}" required autocomplete="off"
             class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
@@ -186,7 +136,7 @@
         </div>
 
         <!-- Número -->
-        <div class="animate-slide-up">
+        <div class="form-field animate-slide-up">
           <label for="numero" class="block text-sm font-medium text-gray-700">Número</label>
           <input id="numero" name="numero" type="number" th:field="*{numero}" required autocomplete="off"
             class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
@@ -194,27 +144,27 @@
         </div>
 
         <!-- Complemento -->
-        <div class="animate-slide-up">
+        <div class="form-field animate-slide-up">
           <label for="complemento" class="block text-sm font-medium text-gray-700">Complemento</label>
           <input id="complemento" name="complemento" type="text" th:field="*{complemento}" autocomplete="off"
             class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-violet-400">
           <span th:if="${#fields.hasErrors('complemento')}" th:errors="*{complemento}" class="text-red-600 text-sm"></span>
         </div>
       </div>
-
-      <!-- Erro -->
-      <div th:if="${erroCadastro}" class="text-red-600 text-sm">
-        <p th:text="${erroCadastro}"></p>
-      </div>
-
-      <!-- Botão -->
-      <div>
-        <button type="submit"
-          class="button-primary w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500">
-          Cadastrar
-        </button>
-      </div>
     </form>
+
+    <div th:if="${erroCadastro}" class="text-red-600 text-sm">
+      <p th:text="${erroCadastro}"></p>
+    </div>
+
+    <!-- Botão -->
+    <div>
+      <button type="submit"
+        class="button-primary w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500">
+        Cadastrar
+      </button>
+    </div>
+
 
     <!-- Link de login -->
     <p class="mt-4 text-center text-sm text-gray-600">
@@ -226,32 +176,112 @@
 
     <!-- Frase do pensador -->
     <p class="mt-8 text-center text-sm italic text-gray-700">
-        "A melhor maneira de se cuidar é nunca se esquecer de você mesmo."
+      "A melhor maneira de se cuidar é nunca se esquecer de você mesmo."
       <br>
       <span class="text-gray-600">— Lair Ribeiro</span>
     </p>
   </div>
 
   <script>
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const body = document.body;
-    
-    // Verifica se há uma preferência salva
-    const darkMode = localStorage.getItem('darkMode');
-    if (darkMode === 'enabled') {
-      body.classList.add('dark-mode');
-      darkModeToggle.textContent = '☀️';
+    // Função para formatar CPF
+    function formatarCPF(input) {
+      let value = input.value.replace(/\D/g, '');
+      if (value.length <= 11) {
+        value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+      }
+      input.value = value;
     }
 
-    darkModeToggle.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
-      if (body.classList.contains('dark-mode')) {
-        localStorage.setItem('darkMode', 'enabled');
-        darkModeToggle.textContent = '☀️';
-      } else {
-        localStorage.setItem('darkMode', 'disabled');
-        darkModeToggle.textContent = '🌙';
+    // Função para formatar telefone
+    function formatarTelefone(input) {
+      let value = input.value.replace(/\D/g, '');
+      if (value.length <= 11) {
+        value = value.replace(/(\d{2})(\d{5})(\d{4})/, "($1)$2-$3");
       }
+      input.value = value;
+    }
+
+    // Função para buscar endereço pelo CEP
+    function buscarEndereco() {
+      const cep = document.getElementById('cep').value.replace(/\D/g, '');
+      if (cep.length === 8) {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+          .then(response => response.json())
+          .then(data => {
+            if (!data.erro) {
+              document.getElementById('logradouro').value = data.logradouro;
+              document.getElementById('bairro').value = data.bairro;
+              document.getElementById('localidade').value = data.localidade;
+              document.getElementById('uf').value = data.uf;
+            }
+          });
+      }
+    }
+
+    // Controle de animação dos campos durante o scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const formContainer = document.querySelector('.form-container');
+      const formFields = document.querySelectorAll('.form-field');
+      
+      // Função para verificar visibilidade dos campos
+      function checkVisibility() {
+        const containerRect = formContainer.getBoundingClientRect();
+        const containerTop = containerRect.top;
+        const containerBottom = containerRect.bottom;
+        
+        // Adicionar classe 'scrolled' quando houver scroll
+        if (formContainer.scrollTop > 0) {
+          formContainer.classList.add('scrolled');
+        } else {
+          formContainer.classList.remove('scrolled');
+        }
+        
+        formFields.forEach((field, index) => {
+          const fieldRect = field.getBoundingClientRect();
+          const fieldTop = fieldRect.top;
+          const fieldBottom = fieldRect.bottom;
+          
+          // Se o campo estiver visível na área de scroll
+          if (fieldTop < containerBottom && fieldBottom > containerTop) {
+            field.classList.add('fade-in');
+            field.classList.remove('fade-out');
+          } else {
+            field.classList.add('fade-out');
+            field.classList.remove('fade-in');
+          }
+        });
+      }
+
+      // Adicionar evento de scroll
+      formContainer.addEventListener('scroll', checkVisibility);
+      
+      // Verificar visibilidade inicial
+      checkVisibility();
+    });
+
+    // Dark mode
+    document.addEventListener('DOMContentLoaded', function() {
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const body = document.body;
+      
+      // Verificar preferência salva
+      const darkMode = localStorage.getItem('darkMode') === 'enabled';
+      if (darkMode) {
+        body.classList.add('dark-mode');
+        darkModeToggle.textContent = '☀️';
+      }
+      
+      // Alternar modo escuro
+      darkModeToggle.addEventListener('click', function() {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+          localStorage.setItem('darkMode', 'enabled');
+          darkModeToggle.textContent = '☀️';
+        } else {
+          localStorage.setItem('darkMode', 'disabled');
+          darkModeToggle.textContent = '🌙';
+        }
+      });
     });
   </script>
 </body>

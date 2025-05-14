@@ -7,6 +7,75 @@ body {
     padding: 20px;
 }
 
+.form-container {
+    max-height: 400px; /* Altura reduzida para mostrar apenas 4 campos */
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #4B5563 #E5E7EB;
+    padding-right: 10px;
+    position: relative;
+}
+
+.form-container::-webkit-scrollbar {
+    width: 6px; /* Scrollbar mais fina */
+}
+
+.form-container::-webkit-scrollbar-track {
+    background: #E5E7EB;
+    border-radius: 4px;
+}
+
+.form-container::-webkit-scrollbar-thumb {
+    background-color: #4B5563;
+    border-radius: 4px;
+}
+
+/* Efeito de fade no topo e base do container */
+.form-container::before,
+.form-container::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 40px; /* Altura reduzida do efeito de fade */
+    pointer-events: none;
+    z-index: 1;
+}
+
+.form-container::before {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    opacity: 0; /* Inicialmente invisível */
+    transition: opacity 0.3s ease;
+}
+
+.form-container::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+}
+
+/* Mostrar o efeito de fade no topo apenas quando houver scroll */
+.form-container.scrolled::before {
+    opacity: 1;
+}
+
+/* Animação para os campos */
+.form-field {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.form-field.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.form-field.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .dark-mode {
     background-color: #1a1b1e !important;
     color: white !important;
@@ -20,8 +89,8 @@ body {
     color: #e5e7eb !important;
 }
 
-.dark-mode .text-gray-500 {
-    color: #9ca3af !important;
+.dark-mode .text-gray-600 {
+    color: #d1d5db !important;
 }
 
 .dark-mode input, 
@@ -53,6 +122,15 @@ body {
 
 .dark-mode .hover\:text-violet-500:hover {
     color: #c4b5fd !important;
+}
+
+/* Ajuste do efeito de fade para o modo escuro */
+.dark-mode .form-container::before {
+    background: linear-gradient(to bottom, rgba(45,46,50,1) 0%, rgba(45,46,50,0) 100%);
+}
+
+.dark-mode .form-container::after {
+    background: linear-gradient(to top, rgba(45,46,50,1) 0%, rgba(45,46,50,0) 100%);
 }
 
 /* Animações e transições */

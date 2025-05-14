@@ -8,64 +8,42 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/formatador.js"></script>
-    <style>
-        body {
-            background-color: #f9fafb;
-            transition: background-color 0.3s ease;
-        }
-        .dark-mode {
-            background-color: #1a1b1e !important;
-            color: #ffffff;
-        }
-        .dark-mode .text-gray-800 {
-            color: #ffffff !important;
-        }
-        .dark-mode .bg-gray-50 {
-            background-color: #1a1b1e !important;
-        }
-        .dark-mode .bg-blue-800 {
-            background-color: #1e40af !important;
-        }
-        .dark-mode .hover\:bg-blue-900:hover {
-            background-color: #1e3a8a !important;
-        }
-        .dark-mode .text-white {
-            color: #ffffff !important;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/admin-home.css">
 </head>
 <body class="min-h-screen bg-gray-50 transition-colors duration-200">
-    <!-- Botão de modo escuro -->
-    <button id="darkModeToggle" class="fixed bottom-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors duration-200">
-        🌙
-    </button>
-
     <div class="flex h-screen">
         <!-- Barra Lateral -->
-        <div class="w-64 bg-blue-800 text-white">
+        <div class="w-64 bg-blue-800 text-white flex flex-col h-full">
             <div class="p-4">
                 <img src="../images/suaConsultaLogo.png" alt="Logo" class="h-12 w-auto mx-auto" />
             </div>
-            <nav class="mt-8">
-                <button onclick="abrirMenuMedico()" class="w-full text-left py-3 px-4 hover:bg-blue-900 transition-colors">
-                    Menu Médico
-                </button>
-                <button onclick="abrirMenuOutro()" class="w-full text-left py-3 px-4 hover:bg-blue-900 transition-colors">
-                    Menu Atendente
-                </button>
-                <button onclick="abrirMenuOutro()" class="w-full text-left py-3 px-4 hover:bg-blue-900 transition-colors">
-                    Menu Postos de saúde
-                </button>
-                <a href="/auth/logout" class="block py-3 px-4 hover:bg-blue-900 transition-colors mt-auto">
+            <nav class="mt-8 flex-grow">
+                <div class="space-y-2 px-4">
+                    <button onclick="abrirMenuMedico()" class="menu-button w-full text-left py-3 px-4 hover:bg-blue-900 transition-all duration-300 rounded-lg">
+                        Menu Médico
+                    </button>
+                    <button onclick="abrirMenuOutro()" class="menu-button w-full text-left py-3 px-4 hover:bg-blue-900 transition-all duration-300 rounded-lg">
+                        Menu Atendente
+                    </button>
+                    <button onclick="abrirMenuOutro()" class="menu-button w-full text-left py-3 px-4 hover:bg-blue-900 transition-all duration-300 rounded-lg">
+                        Menu Postos de saúde
+                    </button>
+                </div>
+            </nav>
+            <div class="p-4 mt-auto">
+                <a href="/auth/logout" class="menu-button block w-full text-center py-3 px-4 hover:bg-blue-900 transition-all duration-300 rounded-lg">
                     Sair
                 </a>
-            </nav>
+            </div>
         </div>
 
         <div class="flex-1">
-            <div id="admin-inicial" class="h-full flex items-center justify-center">
-                <div class="text-center">
-                    <h1 class="text-3xl font-bold text-gray-800 mb-8">Seja bem-vindo, administrador!</h1>
+            <div id="admin-inicial" class="h-full flex flex-col items-center justify-center relative">
+                <div class="text-center opacity-50">
+                    <h1 class="text-4xl font-bold text-gray-800 mb-8 animate-fade-in">Seja bem-vindo, administrador!</h1>
+                </div>
+                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-center">
+                    <p class="text-gray-600 italic opacity-40">"A excelência não é um ato, mas um hábito." - Aristóteles</p>
                 </div>
             </div>
 
@@ -73,26 +51,35 @@
         </div>
     </div>
 
-    <script>
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const body = document.body;
-        
-        // Verifica se há uma preferência salva
-        const darkMode = localStorage.getItem('darkMode');
-        if (darkMode === 'enabled') {
-            body.classList.add('dark-mode');
-            darkModeToggle.textContent = '☀️';
-        }
+    <!-- Botão de modo escuro -->
+    <button id="darkModeToggle" class="fixed bottom-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors duration-200 hover:scale-110 z-50">
+        🌙
+    </button>
 
-        darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('darkMode', 'enabled');
+    <script>
+        // Dark mode
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            
+            // Verificar preferência salva
+            const darkMode = localStorage.getItem('darkMode') === 'enabled';
+            if (darkMode) {
+                body.classList.add('dark-mode');
                 darkModeToggle.textContent = '☀️';
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-                darkModeToggle.textContent = '🌙';
             }
+            
+            // Alternar modo escuro
+            darkModeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
+                    darkModeToggle.textContent = '☀️';
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                    darkModeToggle.textContent = '🌙';
+                }
+            });
         });
 
         function abrirMenuMedico() {
