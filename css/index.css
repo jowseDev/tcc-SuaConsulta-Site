@@ -89,6 +89,7 @@ header {
     height: 24px;
     border-radius: 50%;
     object-fit: cover;
+    color: "white";
 }
 
 .about-section {
