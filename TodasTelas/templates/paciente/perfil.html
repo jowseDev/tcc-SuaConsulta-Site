@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Consulta</title>
+    <script src="/js/buscarCep.js"></script>
+    <script src="/js/formatador.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    
+    <div id="perfil-container">
+        <form id="perfil-form">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required autocomplete="off" disabled>
+
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" maxlength="14" oninput="formatarCPF(this)" required autocomplete="off" disabled>
+
+            <label for="cartaosus">Cartão SUS:</label>
+            <input type="text" id="cartaosus" name="cartaosus" maxlength="15" required autocomplete="off" disabled>
+
+            <label for="datanasc">Data de Nascimento:</label>
+            <input type="date" id="datanasc" name="datanasc" required autocomplete="off" disabled>
+
+            <label for="sexo">Sexo:</label>
+            <select id="sexo" name="sexo" required disabled>
+                <option value="">Selecione</option>
+                <option value="M">Masculino</option>
+                <option value="F">Feminino</option>
+            </select>
+
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" maxlength="15" oninput="formatarTelefone(this)" required autocomplete="off" disabled>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required autocomplete="off" disabled>
+
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" name="cep" onblur="buscarEndereco()" required autocomplete="off" disabled>
+
+            <label for="logradouro">Logradouro:</label>
+            <input type="text" id="logradouro" name="logradouro" required autocomplete="off" disabled>
+
+            <label for="bairro">Bairro:</label>
+            <input type="text" id="bairro" name="bairro" required autocomplete="off" disabled>
+
+            <label for="localidade">Localidade:</label>
+            <input type="text" id="localidade" name="localidade" required autocomplete="off" disabled>
+
+            <label for="uf">UF:</label>
+            <input type="text" id="uf" name="uf" required autocomplete="off" disabled>
+
+            <label for="numero">Número:</label>
+            <input type="number" id="numero" name="numero" required autocomplete="off" disabled>
+
+            <label for="complemento">Complemento:</label>
+            <input type="text" id="complemento" name="complemento" disabled>
+
+            <button type="button" id="editar-btn">Editar</button>
+            <button type="button" id="salvar-btn" style="display: none;">Salvar</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("perfil-form");
+            const editarBtn = document.getElementById("editar-btn");
+            const salvarBtn = document.getElementById("salvar-btn");
+
+            // Fetch profile data
+            axios.get('/api/pessoas/perfil')
+                .then(response => {
+                    const data = response.data;
+                    for (const key in data) {
+                        if (form[key]) {
+                            if (form[key].tagName === "SELECT") {
+                                form[key].value = data[key];
+                            } else {
+                                form[key].value = data[key];
+                            }
+                        }
+                    }
+                })
+                .catch(error => console.error(error));
+
+            // Enable editing
+            editarBtn.addEventListener("click", () => {
+                Array.from(form.elements).forEach(input => {
+                    if (!["cpf", "cartaosus", "email"].includes(input.name)) {
+                        input.disabled = false;
+                    }
+                });
+                editarBtn.style.display = "none";
+                salvarBtn.style.display = "inline-block";
+            });
+
+            // Save changes
+            salvarBtn.addEventListener("click", () => {
+                const updatedData = {};
+                Array.from(form.elements).forEach(input => {
+                    if (input.name && !input.disabled) { // Only include enabled fields
+                        updatedData[input.name] = input.value;
+                    }
+                });
+
+                axios.post('/api/pessoas/editar', updatedData)
+                    .then(response => {
+                        alert("Dados salvos com sucesso!");
+                        Array.from(form.elements).forEach(input => input.disabled = true);
+                        salvarBtn.style.display = "none";
+                        editarBtn.style.display = "inline-block";
+                        window.location.href = '/auth/paciente/home';
+                    })
+                    .catch(error => console.error(error));
+            });
+        });
+    </script>
+
+</body>
+</html>

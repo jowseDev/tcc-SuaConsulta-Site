@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Consulta</title>
+    <script src="/js/redirecionar.js"></script>
+    <script src="/js/formatador.js"></script>
+</head>
+<body>
+    
+    <h1>Realize seu login</h1>
+    <form th:action="@{/auth/login}" method="post">
+        
+        <label for="cpf">CPF:</label>
+        <input type="text" name="cpf" id="cpf" maxlength="14" oninput="formatarCPF(this)" required autocomplete="off">
+        <br>
+        
+        <label for="senha">Senha:</label>
+        <input type="password" name="senha" id="senha" required autocomplete="off">
+
+        <div th:if="${erroLogin}" style="color: red;">
+            <p th:text="${erroLogin}"></p>
+        </div>
+        
+        <button type="submit">Entrar</button>
+        
+    </form>
+    
+    <h4>Não possui cadastro?</h4>
+    <button onclick="registrar()">Cadastre-se</button>
+
+    
+</body>
+</html>
