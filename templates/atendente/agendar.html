@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
+    <link rel="stylesheet" href="/css/agendar.css">
     <script src="/js/formatador.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -16,10 +17,12 @@
 
     <button onclick="window.location.href='/auth/atendente/home'">Fechar menu</button>
 
-    <h2>Buscar Pessoa por CPF</h2>
-    <input type="text" id="cpfInput" placeholder="Digite o CPF" maxlength="14" oninput="formatarCPF(this)" required
-        autocomplete="off">
-    <button id="buscarBtn">Buscar</button>
+    <div class="search-container">
+        <h2>Buscar Pessoa por CPF</h2>
+        <input type="text" id="cpfInput" placeholder="Digite o CPF" maxlength="14" oninput="formatarCPF(this)" required
+            autocomplete="off">
+        <button id="buscarBtn">Buscar</button>
+    </div>
 
     <div id="resultado"></div>
 

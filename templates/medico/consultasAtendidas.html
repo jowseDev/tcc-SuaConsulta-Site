@@ -4,14 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
+    <link rel="stylesheet" href="/static/css/medico/consultasAtendidas.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    
-    <div id="consultas-container"></div>
+    <header>
+        <img src="/static/img/logo.png" alt="Logo Sua Consulta" class="logo">
+    </header>
 
-    
+    <div class="container">
+        <div class="main-content">
+            <div class="page-header">
+                <h2>Consultas Atendidas</h2>
+                <button onclick="voltarInicio()" class="back-button">Voltar</button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Buscar consultas...">
+                <button class="search-button">Buscar</button>
+            </div>
+
+            <table class="consultations-table">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Paciente</th>
+                        <th>Motivo</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="consultas-container">
+                    <!-- As consultas serão inseridas aqui via JavaScript -->
+                </tbody>
+            </table>
+
+            <div id="no-results" class="no-results" style="display: none;">
+                Nenhuma consulta encontrada.
+            </div>
+        </div>
+    </div>
+
     <script>
         // Fetch consultations from the API
         axios.get('/api/consultas/consultasAtendidas')
@@ -67,8 +100,17 @@
             })
             .catch(error => {
                 console.error('Erro ao buscar consultas:', error);
+                Swal.fire({
+                    title: 'Erro',
+                    text: 'Não foi possível carregar as consultas.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
             });
-    </script>
 
+        function voltarInicio() {
+            window.location.href = '/auth/medico/home';
+        }
+    </script>
 </body>
 </html>

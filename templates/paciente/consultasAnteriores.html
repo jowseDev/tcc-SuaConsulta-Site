@@ -4,14 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
+    <link rel="stylesheet" href="./static/css/paciente/consultasAnteriores.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    
-    <div id="consultas-container"></div>
+    <header>
+        <img src="/static/img/logo.png" alt="Logo Sua Consulta" class="logo">
+    </header>
 
-    
+    <div class="container">
+        <div class="main-content">
+            <div class="page-header">
+                <h2>Consultas Anteriores</h2>
+                <button onclick="voltarInicio()" class="back-button">Voltar</button>
+            </div>
+
+            <div class="consultations-container" id="consultas-container">
+                <!-- As consultas serão inseridas aqui via JavaScript -->
+            </div>
+        </div>
+    </div>
+
     <script>
         // Fetch consultations from the API
         axios.get('/api/consultas/consultasAnteriores')

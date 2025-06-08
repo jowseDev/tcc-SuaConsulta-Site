@@ -9,6 +9,8 @@ body {
 
 header {
     padding: 0;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -23,83 +25,72 @@ header {
     padding: 0 20px;
 }
 
-.login-container {
+.main-content {
     flex: 1;
+    padding: 40px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 20px;
 }
 
-.login-form {
+.selection-container {
     background-color: white;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
     width: 100%;
-    max-width: 400px;
 }
 
-.login-form h2 {
+.selection-container h2 {
     color: #10089d;
-    text-align: center;
+    margin-top: 0;
     margin-bottom: 30px;
     font-size: 24px;
 }
 
-.form-group {
-    margin-bottom: 20px;
+.selection-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #333;
-    font-weight: 500;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: #10089d;
-}
-
-.login-button {
-    width: 100%;
+.selection-button {
     background-color: #10089d;
     color: white;
-    padding: 12px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.selection-button:hover {
+    background-color: #0d0b7a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button {
+    background-color: #6c757d;
+    color: white;
+    padding: 12px 24px;
     border: none;
     border-radius: 6px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    margin-top: 20px;
 }
 
-.login-button:hover {
-    background-color: #0d0b7a;
+.back-button:hover {
+    background-color: #5a6268;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.error-message {
-    color: #dc3545;
-    font-size: 14px;
-    margin-top: 5px;
-    display: none;
-}
-
-.error-message.show {
-    display: block;
 } 

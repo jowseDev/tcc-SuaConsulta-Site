@@ -144,7 +144,6 @@ header {
     color: #333;
 }
 
-.campo-crm,
 .campo-especialidade {
     width: 100%;
     padding: 12px;
@@ -154,7 +153,6 @@ header {
     font-size: 16px;
 }
 
-.campo-crm:focus,
 .campo-especialidade:focus {
     outline: none;
     border-color: #10089d;
@@ -194,102 +192,4 @@ header {
     background-color: #5a6268 !important;
     transform: translateY(-2px) !important;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #333;
-    font-weight: 500;
-}
-
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-    outline: none;
-    border-color: #10089d;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-.submit-button {
-    background-color: #10089d;
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 20px;
-}
-
-.submit-button:hover {
-    background-color: #0d0b7a;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.error-message {
-    color: #dc3545;
-    font-size: 14px;
-    margin-top: 5px;
-    display: none;
-}
-
-.error-message.show {
-    display: block;
-}
-
-.specialty-container {
-    margin-top: 10px;
-}
-
-.specialty-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.specialty-item {
-    background-color: #f8f9fa;
-    padding: 8px 12px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.specialty-item button {
-    background: none;
-    border: none;
-    color: #dc3545;
-    cursor: pointer;
-    padding: 0;
-    font-size: 16px;
-}
-
-.specialty-item button:hover {
-    color: #c82333;
 } 

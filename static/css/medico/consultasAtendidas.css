@@ -43,35 +43,14 @@ header {
     font-size: 24px;
 }
 
-.add-button {
-    background-color: #10089d;
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.add-button:hover {
-    background-color: #0d0b7a;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
 .search-container {
-    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
 }
 
 .search-input {
-    width: 100%;
+    flex: 1;
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 6px;
@@ -84,42 +63,59 @@ header {
     border-color: #10089d;
 }
 
-.table-container {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+.search-button {
+    background-color: #10089d;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-table {
+.search-button:hover {
+    background-color: #0d0b7a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.consultations-table {
     width: 100%;
     border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-th, td {
+.consultations-table th {
+    background-color: #10089d;
+    color: white;
     padding: 15px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    font-weight: 500;
 }
 
-th {
+.consultations-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+.consultations-table tr:last-child td {
+    border-bottom: none;
+}
+
+.consultations-table tr:hover {
     background-color: #f8f9fa;
-    color: #10089d;
-    font-weight: bold;
-}
-
-tr:hover {
-    background-color: #f8f9fa;
-}
-
-.action-icons {
-    display: flex;
-    gap: 10px;
 }
 
 .action-icon {
     color: #10089d;
-    cursor: pointer;
+    text-decoration: none;
+    margin-right: 10px;
     transition: color 0.3s ease;
 }
 
@@ -131,6 +127,10 @@ tr:hover {
     text-align: center;
     padding: 40px;
     color: #666;
+    font-size: 18px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .back-button {
@@ -143,9 +143,6 @@ tr:hover {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 20px;
 }
 
 .back-button:hover {

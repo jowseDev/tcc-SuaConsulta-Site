@@ -4,15 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
+    <link rel="stylesheet" href="./static/css/medico/home.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    
-    <h1>Bem vindo, Dr(a). <span th:text="${nome}"></span></h1>
-    
-    <div id="consulta-info" style="display: flex; justify-content: center; margin: 16px 0;"></div>
-    <p id="consulta-detalhes" style="text-align: center;">Carregando informações das próximas consultas...</p>
+    <header>
+        <img src="/static/img/logo.png" alt="Logo Sua Consulta" class="logo">
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="welcome-section">
+                <h2>Bem vindo, Dr(a). <span th:text="${nome}"></span></h2>
+            </div>
+
+            <div class="consultations-section">
+                <h3>Próximas Consultas</h3>
+                <div id="consulta-info" class="consultations-container"></div>
+                <p id="consulta-detalhes" class="loading-text">Carregando informações das próximas consultas...</p>
+            </div>
+
+            <div class="actions-section">
+                <a href="/auth/medico/atendimentos" class="action-button">Consultas Atendidas</a>
+            </div>
+        </div>
+    </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -23,20 +40,10 @@
                     const consultaDetalhesP = document.getElementById('consulta-detalhes');
 
                     if (consultas && consultas.length > 0) {
-                        consultaDetalhesP.style.display = 'none'; // Hide the loading text
-
-                        const card = document.createElement('div');
-                        card.style.border = '1px solid #ccc';
-                        card.style.borderRadius = '8px';
-                        card.style.padding = '16px';
-                        card.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
-                        card.style.width = '90%';
-                        card.style.maxWidth = '1200px';
-                        card.style.backgroundColor = '#f9f9f9';
+                        consultaDetalhesP.style.display = 'none';
 
                         const list = document.createElement('ul');
-                        list.style.listStyle = 'none';
-                        list.style.padding = '0';
+                        list.className = 'consultations-list';
 
                         consultas.forEach(function (consulta) {
                             let dataConsulta;
@@ -72,27 +79,22 @@
                             }
 
                             const listItem = document.createElement('li');
-                            listItem.style.borderBottom = '1px solid #ddd';
-                            listItem.style.padding = '8px 0';
-                            listItem.style.display = 'flex';
-                            listItem.style.justifyContent = 'space-between';
-                            listItem.style.alignItems = 'center';
+                            listItem.className = 'consultation-item';
 
                             listItem.innerHTML = `
-                                <div>
+                                <div class="consultation-info">
                                     <p><strong>Consulta com:</strong> ${consulta.nomePessoa}</p>
                                     <p><strong>Data:</strong> ${dataConsulta.toLocaleString('pt-BR')}</p>
                                     <p>${detalhes}</p>
                                     <p><strong>Observações:</strong> ${consulta.observacoes}</p>
                                 </div>
-                                <button style="padding: 8px 16px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;" onclick="${botaoAcao}">${botaoTexto}</button>
+                                <button class="action-button" onclick="${botaoAcao}">${botaoTexto}</button>
                             `;
 
                             list.appendChild(listItem);
                         });
 
-                        card.appendChild(list);
-                        consultaInfoDiv.appendChild(card);
+                        consultaInfoDiv.appendChild(list);
                     } else {
                         consultaDetalhesP.innerText = "Você não tem consultas agendadas.";
                     }

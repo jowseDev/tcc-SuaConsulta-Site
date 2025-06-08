@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
-
-    <!--<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>-->
+    <link rel="stylesheet" href="/static/css/listaAtendentes.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <script>
         function listarAssincrono() {
@@ -19,8 +19,16 @@
                             <td>${item.nome}</td>
                             <td>${item.ra}</td>
                             <td>${item.cnes}</td>
-                            <td>🛠️</td>
-                            <td>❌</td>
+                            <td>
+                                <a href="#" class="action-icon edit-icon" title="Editar">
+                                    <span>🛠️</span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#" class="action-icon delete-icon" title="Excluir">
+                                    <span>❌</span>
+                                </a>
+                            </td>
                         </tr>
                     `);
                 });
@@ -31,30 +39,39 @@
     </script>
 </head>
 <body>
+    <header>
+        <img src="/static/img/logo.png" alt="Logo Sua Consulta" class="logo">
+    </header>
 
-    <button onclick="voltarInicio()">Fechar menu</button>
+    <div class="container">
+        <div class="main-content">
+            <div class="page-header">
+                <h2>Lista de Atendentes</h2>
+                <button onclick="voltarInicio()" class="back-button">Voltar</button>
+            </div>
 
-    <div>
-        <h1>Lista de Atendentes</h1>
+            <div class="actions-bar">
+                <button onclick="listarAssincrono()" class="action-button">Listar Atendentes</button>
+            </div>
 
-        <button onclick="listarAssincrono()">Listar Atendentes</button>
-
-        <table id="tabela-atendente" style="display: none;">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Pessoa</th>
-                    <th>RA</th>
-                    <th>Cód. Posto</th>
-                    <th>Alterar</th>
-                    <th>Excluir</th>
-                </tr>
-            </thead>
-            <tbody id="corpo">
-                <!-- Dados carregados via JS -->
-            </tbody>
-        </table>
+            <div class="table-container">
+                <table id="tabela-atendente">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Pessoa</th>
+                            <th>RA</th>
+                            <th>Cód. Posto</th>
+                            <th>Alterar</th>
+                            <th>Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpo">
+                        <!-- Dados carregados via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
 </body>
 </html>

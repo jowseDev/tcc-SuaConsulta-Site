@@ -43,7 +43,11 @@ header {
     font-size: 24px;
 }
 
-.add-button {
+.actions-bar {
+    margin-bottom: 20px;
+}
+
+.action-button {
     background-color: #10089d;
     color: white;
     padding: 12px 24px;
@@ -53,51 +57,48 @@ header {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
 
-.add-button:hover {
+.action-button:hover {
     background-color: #0d0b7a;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.search-container {
-    margin-bottom: 20px;
-}
-
-.search-input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
+.back-button {
+    background-color: #6c757d;
+    color: white;
+    padding: 12px 24px;
+    border: none;
     border-radius: 6px;
     font-size: 16px;
-    transition: border-color 0.3s ease;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.search-input:focus {
-    outline: none;
-    border-color: #10089d;
+.back-button:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .table-container {
     background-color: white;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    overflow-x: auto;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
 th, td {
-    padding: 15px;
+    padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
@@ -112,44 +113,25 @@ tr:hover {
     background-color: #f8f9fa;
 }
 
-.action-icons {
-    display: flex;
-    gap: 10px;
-}
-
 .action-icon {
     color: #10089d;
-    cursor: pointer;
-    transition: color 0.3s ease;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
 .action-icon:hover {
     color: #0d0b7a;
+    transform: scale(1.1);
 }
 
-.no-results {
-    text-align: center;
-    padding: 40px;
-    color: #666;
+.edit-icon {
+    color: #10089d;
 }
 
-.back-button {
-    background-color: #6c757d;
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 20px;
+.delete-icon {
+    color: #dc3545;
 }
 
-.back-button:hover {
-    background-color: #5a6268;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.delete-icon:hover {
+    color: #c82333;
 } 

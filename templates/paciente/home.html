@@ -4,14 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
+    <link rel="stylesheet" href="../../static/css/paciente/home.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <h1>Bem vindo, <span th:text="${nome}"></span></h1>
+    <header>
+        <button class="back-button" onclick="window.location.href='/auth/login'">
+            <img src="../../static/images/botaoVoltarImg.png" alt="Voltar">
+        </button>
+        <img src="../../static/images/suaConsultaLogo.png" alt="Logo Sua Consulta" class="logo">
+    </header>
 
-    <div id="consulta-info" style="display: flex; justify-content: center; margin: 16px 0;"></div>
-    <p id="consulta-detalhes" style="text-align: center;">Carregando informações das próximas consultas...</p>
+    <div class="container">
+        <div class="main-content">
+            <div class="welcome-section">
+                <h2>Bem vindo, <span th:text="${nome}"></span></h2>
+                <p>Gerencie suas consultas e informações pessoais</p>
+            </div>
+
+            <div class="content-wrapper">
+                <div class="consultations-section">
+                    <h3>Próximas Consultas</h3>
+                    <div id="consulta-info"></div>
+                    <p id="consulta-detalhes">Carregando informações das próximas consultas...</p>
+                </div>
+
+                <div class="actions-grid">
+                    <a href="/auth/paciente/agendar" class="action-card">
+                        <img src="../../static/images/agendarConsultaImg.png" alt="Agendar Consulta">
+                        <h3>Agendar Consulta</h3>
+                        <p>Marque uma nova consulta com um médico</p>
+                    </a>
+
+                    <a href="/auth/paciente/consultas" class="action-card">
+                        <img src="../../static/images/consultaAgendadaImg.png" alt="Consultas Anteriores">
+                        <h3>Consultas Anteriores</h3>
+                        <p>Visualize seu histórico de consultas</p>
+                    </a>
+
+                    <a href="/auth/paciente/perfil" class="action-card">
+                        <img src="../../static/images/fotoPerfilImg.png" alt="Meu Perfil">
+                        <h3>Meu Perfil</h3>
+                        <p>Gerencie suas informações pessoais</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -22,16 +62,10 @@
                     const consultaDetalhesP = document.getElementById('consulta-detalhes');
 
                     if (consultas && consultas.length > 0) {
-                        consultaDetalhesP.style.display = 'none'; // Hide the loading text
+                        consultaDetalhesP.style.display = 'none';
 
                         const card = document.createElement('div');
-                        card.style.border = '1px solid #ccc';
-                        card.style.borderRadius = '8px';
-                        card.style.padding = '16px';
-                        card.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
-                        card.style.width = '90%';
-                        card.style.maxWidth = '1200px';
-                        card.style.backgroundColor = '#f9f9f9';
+                        card.className = 'stat-card';
 
                         const list = document.createElement('ul');
                         list.style.listStyle = 'none';
@@ -76,7 +110,7 @@
                                     <p><strong>Data:</strong> ${dataConsulta.toLocaleString('pt-BR')}</p>
                                     <p>${detalhes}</p>
                                 </div>
-                                <button style="padding: 8px 16px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;" onclick="verDetalhes(${JSON.stringify(consulta).replace(/"/g, '&quot;')})">Ver detalhes</button>
+                                <button class="action-button" onclick="verDetalhes(${JSON.stringify(consulta).replace(/"/g, '&quot;')})">Ver detalhes</button>
                             `;
 
                             list.appendChild(listItem);
@@ -108,9 +142,5 @@
             });
         }
     </script>
-
-<button onclick="window.location.href='/auth/paciente/agendar'">Agendar consulta</button>
-<button onclick="window.location.href='/auth/paciente/consultas'">Consultas anteriores</button>
-<button onclick="window.location.href='/auth/paciente/perfil'">Perfil</button>
 </body>
 </html>

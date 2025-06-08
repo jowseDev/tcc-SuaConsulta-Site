@@ -4,27 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sua Consulta</title>
-  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="../static/css/index.css">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="/js/redirecionar.js"></script>
-  <script src="/js/carousel.js"></script>
+  <script src="../static/js/redirecionar.js"></script>
+  <script src="../static/js/carousel.js"></script>
 </head>
 <body>
-  <header class="fixed w-full top-0 z-50 bg-white shadow-md">
+  <header>
     <div class="container mx-auto px-4 flex justify-between items-center h-24">
-      <img src="images/suaConsultaLogo.png" alt="Logo Sua Consulta" class="logo h-16">
+      <img src="../static/images/suaConsultaLogo.png" alt="Logo Sua Consulta" class="logo">
       <button onclick="logar()" class="login-button">
-        <img src="images/fotoPerfilImg.png" alt="Perfil" class="profile-icon">
+        <img src="../static/images/fotoPerfilImg.png" alt="Perfil" class="profile-icon">
         LOGIN
       </button>
     </div>
   </header>
 
-  <div class="carousel mt-0">
+  <div class="carousel">
     <div class="flex animate-[slide_15s_infinite]">
-      <img src="images/medicosSiteHome1.png" alt="Médicos atendendo" />
-      <img src="images/medicosSiteHome2.png" alt="Consultório médico" />
-      <img src="images/medicosSiteHome3.png" alt="Equipe médica" />
+      <img src="../static/images/medicosSiteHome1.png" alt="Médicos atendendo" />
+      <img src="../static/images/medicosSiteHome2.png" alt="Consultório médico" />
+      <img src="../static/images/medicosSiteHome3.png" alt="Equipe médica" />
     </div>
   </div>
 
@@ -35,7 +35,7 @@
 
   <section class="about-section">
     <div class="about-content">
-      <img src="images/ImagemHome4.png" alt="Médico" class="about-image">
+      <img src="../static/images/ImagemHome4.png" alt="Médico" class="about-image">
       <div class="about-text">
         <h2>Sobre o Projeto</h2>
         <p>
@@ -49,7 +49,7 @@
     <h3>Notícias Sua Consulta</h3>
     <div class="news-grid">
       <div class="news-card">
-        <img src="images/noticia1.jpg" alt="Notícia 1" class="news-image">
+        <img src="../static/images/noticia1.jpg" alt="Notícia 1" class="news-image">
         <div class="news-content">
           <h4>Nova Unidade de Atendimento</h4>
           <p>O Sua Consulta inaugura mais uma unidade de atendimento em São Paulo, ampliando o acesso à saúde para mais pessoas.</p>
@@ -62,7 +62,7 @@
       </div>
 
       <div class="news-card">
-        <img src="images/noticia2.jpg" alt="Notícia 2" class="news-image">
+        <img src="../static/images/noticia2.jpg" alt="Notícia 2" class="news-image">
         <div class="news-content">
           <h4>Parceria com Hospital Municipal</h4>
           <p>Firmamos uma importante parceria com o Hospital Municipal para melhorar ainda mais o atendimento aos pacientes.</p>
@@ -75,7 +75,7 @@
       </div>
 
       <div class="news-card">
-        <img src="images/noticia3.jpg" alt="Notícia 3" class="news-image">
+        <img src="../static/images/noticia3.jpg" alt="Notícia 3" class="news-image">
         <div class="news-content">
           <h4>Novo Sistema de Agendamento</h4>
           <p>Lançamos um novo sistema de agendamento online que promete reduzir o tempo de espera em até 50%.</p>
@@ -94,7 +94,7 @@
     <div class="team-grid">
       <div class="team-member">
         <div class="member-content">
-          <img src="images/imagemPerfilHome1.png" alt="Criador 1">
+          <img src="../static/images/imagemPerfilHome1.png" alt="Criador 1">
           <div class="member-info">
             <p class="name">José Augusto</p>
             <p class="role">Desenvolvedor Mobile</p>
@@ -103,7 +103,7 @@
       </div>
       <div class="team-member">
         <div class="member-content">
-          <img src="images/imagemPerfilHome2.png" alt="Criador 2">
+          <img src="../static/images/imagemPerfilHome2.png" alt="Criador 2">
           <div class="member-info">
             <p class="name">Enzo Ribeiro</p>
             <p class="role">Desenvolvedor Backend</p>
@@ -112,7 +112,7 @@
       </div>
       <div class="team-member">
         <div class="member-content">
-          <img src="images/imagemPerfilHome3.png" alt="Criador 3">
+          <img src="../static/images/imagemPerfilHome3.png" alt="Criador 3">
           <div class="member-info">
             <p class="name">Bruno Xavier</p>
             <p class="role">Analista de Documentação</p>
@@ -121,7 +121,7 @@
       </div>
       <div class="team-member">
         <div class="member-content">
-          <img src="images/imagemPerfilHome4.png" alt="Criador 4">
+          <img src="../static/images/imagemPerfilHome4.png" alt="Criador 4">
           <div class="member-info">
             <p class="name">Emanuelle Oliveira</p>
             <p class="role">Estagiaria</p>

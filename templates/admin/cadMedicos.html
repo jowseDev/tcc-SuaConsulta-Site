@@ -3,24 +3,39 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
-    <!--
+    <link rel="stylesheet" href="/static/css/cadMedicos.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/formatador.js"></script>-->
-    <link rel="stylesheet" href="/css/styleMedico.css">
+    <script src="/js/formatador.js"></script>
 </head>
 
 <body>
+    <header>
+        <img src="/static/img/logo.png" alt="Logo Sua Consulta" class="logo">
+    </header>
 
-    <button onclick="voltarInicio()">Fechar menu</button>
+    <div class="container">
+        <div class="main-content">
+            <div class="page-header">
+                <h2>Cadastro de Médico</h2>
+                <button onclick="voltarInicio()" class="back-button">Voltar</button>
+            </div>
 
-    <h2>Buscar Pessoa por CPF</h2>
-    <input type="text" id="cpfInput" placeholder="Digite o CPF" maxlength="14" oninput="formatarCPF(this)" required
-        autocomplete="off">
-    <button id="buscarBtn">Buscar</button>
+            <div class="form-container">
+                <div class="search-section">
+                    <h3>Buscar Pessoa por CPF</h3>
+                    <div class="search-group">
+                        <input type="text" id="cpfInput" class="search-input" placeholder="Digite o CPF" maxlength="14" oninput="formatarCPF(this)" required autocomplete="off">
+                        <button id="buscarBtn" class="search-button">Buscar</button>
+                    </div>
+                </div>
 
-    <div id="resultado"></div>
+                <div id="resultado"></div>
+            </div>
+        </div>
+    </div>
 
     <script>
         $(document).ready(function () {
@@ -151,9 +166,6 @@
             });
         }
     </script>
-    
-
-
 </body>
 
 </html>

@@ -4,68 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
-    <script src="/js/buscarCep.js"></script>
-    <script src="/js/formatador.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/css/paciente/perfil.css">
+    <script src="../../static/js/buscarCep.js"></script>
+    <script src="../../static/js/formatador.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    
-    <div id="perfil-container">
-        <form id="perfil-form">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required autocomplete="off" disabled>
+    <header>
+        <button class="back-button" onclick="voltarInicio()">
+            <img src="../../static/images/botaoVoltarImg.png" alt="Voltar">
+        </button>
+        <img src="../../static/images/suaConsultaLogo.png" alt="Logo Sua Consulta" class="logo">
+    </header>
 
-            <label for="cpf">CPF:</label>
-            <input type="text" id="cpf" name="cpf" maxlength="14" oninput="formatarCPF(this)" required autocomplete="off" disabled>
+    <div class="container">
+        <div class="main-content">
+            <div class="page-header">
+                <h2>Meu Perfil</h2>
+            </div>
 
-            <label for="cartaosus">Cartão SUS:</label>
-            <input type="text" id="cartaosus" name="cartaosus" maxlength="15" required autocomplete="off" disabled>
+            <div class="profile-container">
+                <div class="form-section">
+                    <h3>Informações Pessoais</h3>
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo</label>
+                            <input type="text" id="nome" name="nome" required disabled>
+                        </div>
 
-            <label for="datanasc">Data de Nascimento:</label>
-            <input type="date" id="datanasc" name="datanasc" required autocomplete="off" disabled>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" required disabled>
+                        </div>
 
-            <label for="sexo">Sexo:</label>
-            <select id="sexo" name="sexo" required disabled>
-                <option value="">Selecione</option>
-                <option value="M">Masculino</option>
-                <option value="F">Feminino</option>
-            </select>
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" id="telefone" name="telefone" required disabled>
+                        </div>
 
-            <label for="telefone">Telefone:</label>
-            <input type="text" id="telefone" name="telefone" maxlength="15" oninput="formatarTelefone(this)" required autocomplete="off" disabled>
+                        <div class="form-group">
+                            <label for="dataNascimento">Data de Nascimento</label>
+                            <input type="date" id="dataNascimento" name="dataNascimento" required disabled>
+                        </div>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required autocomplete="off" disabled>
+                        <div class="form-group">
+                            <label for="endereco">Endereço</label>
+                            <input type="text" id="endereco" name="endereco" required disabled>
+                        </div>
 
-            <label for="cep">CEP:</label>
-            <input type="text" id="cep" name="cep" onblur="buscarEndereco()" required autocomplete="off" disabled>
+                        <div class="form-group">
+                            <label for="bairro">Bairro</label>
+                            <input type="text" id="bairro" name="bairro" required disabled>
+                        </div>
 
-            <label for="logradouro">Logradouro:</label>
-            <input type="text" id="logradouro" name="logradouro" required autocomplete="off" disabled>
+                        <div class="form-group">
+                            <label for="cidade">Cidade</label>
+                            <input type="text" id="cidade" name="cidade" required disabled>
+                        </div>
 
-            <label for="bairro">Bairro:</label>
-            <input type="text" id="bairro" name="bairro" required autocomplete="off" disabled>
+                        <div class="form-group">
+                            <label for="estado">Estado</label>
+                            <input type="text" id="estado" name="estado" required disabled>
+                        </div>
 
-            <label for="localidade">Localidade:</label>
-            <input type="text" id="localidade" name="localidade" required autocomplete="off" disabled>
+                        <div class="form-group">
+                            <label for="cep">CEP</label>
+                            <input type="text" id="cep" name="cep" required disabled>
+                        </div>
 
-            <label for="uf">UF:</label>
-            <input type="text" id="uf" name="uf" required autocomplete="off" disabled>
-
-            <label for="numero">Número:</label>
-            <input type="number" id="numero" name="numero" required autocomplete="off" disabled>
-
-            <label for="complemento">Complemento:</label>
-            <input type="text" id="complemento" name="complemento" disabled>
-
-            <button type="button" id="editar-btn">Editar</button>
-            <button type="button" id="salvar-btn" style="display: none;">Salvar</button>
-        </form>
+                        <div class="form-actions">
+                            <button type="button" id="editar-btn" class="edit-button">
+                                <img src="../../static/images/edit.png" alt="Editar">
+                                Editar
+                            </button>
+                            <button type="submit" id="salvar-btn" class="save-button" style="display: none;">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const form = document.getElementById("perfil-form");
+            const form = document.getElementById("profileForm");
             const editarBtn = document.getElementById("editar-btn");
             const salvarBtn = document.getElementById("salvar-btn");
 
@@ -83,7 +109,15 @@
                         }
                     }
                 })
-                .catch(error => console.error(error));
+                .catch(error => {
+                    console.error(error);
+                    Swal.fire({
+                        title: 'Erro',
+                        text: 'Não foi possível carregar os dados do perfil.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                });
 
             // Enable editing
             editarBtn.addEventListener("click", () => {
@@ -100,23 +134,40 @@
             salvarBtn.addEventListener("click", () => {
                 const updatedData = {};
                 Array.from(form.elements).forEach(input => {
-                    if (input.name && !input.disabled) { // Only include enabled fields
+                    if (input.name && !input.disabled) {
                         updatedData[input.name] = input.value;
                     }
                 });
 
                 axios.post('/api/pessoas/editar', updatedData)
                     .then(response => {
-                        alert("Dados salvos com sucesso!");
-                        Array.from(form.elements).forEach(input => input.disabled = true);
-                        salvarBtn.style.display = "none";
-                        editarBtn.style.display = "inline-block";
-                        window.location.href = '/auth/paciente/home';
+                        Swal.fire({
+                            title: 'Sucesso',
+                            text: 'Dados salvos com sucesso!',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            Array.from(form.elements).forEach(input => input.disabled = true);
+                            salvarBtn.style.display = "none";
+                            editarBtn.style.display = "inline-block";
+                            window.location.href = '/auth/paciente/home';
+                        });
                     })
-                    .catch(error => console.error(error));
+                    .catch(error => {
+                        console.error(error);
+                        Swal.fire({
+                            title: 'Erro',
+                            text: 'Não foi possível salvar os dados.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    });
             });
         });
-    </script>
 
+        function voltarInicio() {
+            window.location.href = '/auth/paciente/home';
+        }
+    </script>
 </body>
 </html>
