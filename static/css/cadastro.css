@@ -1,0 +1,289 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    transition: background-color 0.3s ease;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.form-container {
+    max-height: 400px; /* Altura reduzida para mostrar apenas 4 campos */
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #4B5563 #E5E7EB;
+    padding-right: 10px;
+    position: relative;
+}
+
+.form-container::-webkit-scrollbar {
+    width: 6px; /* Scrollbar mais fina */
+}
+
+.form-container::-webkit-scrollbar-track {
+    background: #E5E7EB;
+    border-radius: 4px;
+}
+
+.form-container::-webkit-scrollbar-thumb {
+    background-color: #4B5563;
+    border-radius: 4px;
+}
+
+/* Efeito de fade no topo e base do container */
+.form-container::before,
+.form-container::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 40px; /* Altura reduzida do efeito de fade */
+    pointer-events: none;
+    z-index: 1;
+}
+
+.form-container::before {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    opacity: 0; /* Inicialmente invisível */
+    transition: opacity 0.3s ease;
+}
+
+.form-container::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+}
+
+/* Mostrar o efeito de fade no topo apenas quando houver scroll */
+.form-container.scrolled::before {
+    opacity: 1;
+}
+
+/* Animação para os campos */
+.form-field {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.form-field.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.form-field.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dark-mode {
+    background-color: #1a1b1e !important;
+    color: white !important;
+}
+
+.dark-mode .text-gray-900 {
+    color: white !important;
+}
+
+.dark-mode .text-gray-700 {
+    color: #e5e7eb !important;
+}
+
+.dark-mode .text-gray-600 {
+    color: #d1d5db !important;
+}
+
+.dark-mode input, 
+.dark-mode select {
+    background-color: #2d2e32 !important;
+    color: white !important;
+}
+
+.dark-mode input::placeholder,
+.dark-mode select::placeholder {
+    color: #9ca3af !important;
+}
+
+.dark-mode .border-gray-300 {
+    border-color: #4b5563 !important;
+}
+
+.dark-mode .bg-white {
+    background-color: #2d2e32 !important;
+}
+
+.dark-mode .hover\:bg-violet-700:hover {
+    background-color: #7c3aed !important;
+}
+
+.dark-mode .text-violet-600 {
+    color: #a78bfa !important;
+}
+
+.dark-mode .hover\:text-violet-500:hover {
+    color: #c4b5fd !important;
+}
+
+/* Ajuste do efeito de fade para o modo escuro */
+.dark-mode .form-container::before {
+    background: linear-gradient(to bottom, rgba(45,46,50,1) 0%, rgba(45,46,50,0) 100%);
+}
+
+.dark-mode .form-container::after {
+    background: linear-gradient(to top, rgba(45,46,50,1) 0%, rgba(45,46,50,0) 100%);
+}
+
+/* Animações e transições */
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.button-primary {
+    background-color: #3019c5 !important;
+    color: white !important;
+    transition: all 0.3s ease;
+}
+
+.button-primary:hover {
+    background-color: #2513a3 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button-secondary {
+    background-color: #000089 !important;
+    color: white !important;
+    transition: all 0.3s ease;
+}
+
+.button-secondary:hover {
+    background-color: #000066 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Animações do Tailwind */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+}
+
+.cadastro-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.cadastro-container h1 {
+    color: #10089d;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.submit-button {
+    width: 100%;
+    background-color: #4021d9;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+.submit-button:hover {
+    background-color: #ffffff;
+}
+
+.error-message { 
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .cadastro-container {
+        padding: 20px;
+    }
+}
+
+/* Transições suaves */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+/* Estilos para inputs e selects */
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #3019c5 !important;
+    box-shadow: 0 0 0 2px rgba(48, 25, 197, 0.2);
+}
+
+/* Estilos para links */
+a {
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #3019c5 !important;
+} 

@@ -1,0 +1,33 @@
+/* Estilos do SweetAlert2 */
+.popup-alerta {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+}
+
+.titulo-alerta {
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.conteudo-alerta {
+    font-size: 16px;
+}
+
+.dados-pessoa-alerta p {
+    margin: 5px 0;
+}
+
+.campo-crm,
+.campo-especialidade {
+    font-size: 16px;
+}
+
+.botao-confirmar {
+    background-color: #28a745 !important;
+    color: white !important;
+}
+
+.botao-cancelar {
+    background-color: #dc3545 !important;
+    color: white !important;
+}

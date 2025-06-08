@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sua Consulta</title>
+  <link rel="stylesheet" href="css/index.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/js/redirecionar.js"></script>
+  <script src="/js/carousel.js"></script>
+</head>
+<body>
+  <header class="fixed w-full top-0 z-50 bg-white shadow-md">
+    <div class="container mx-auto px-4 flex justify-between items-center h-24">
+      <img src="images/suaConsultaLogo.png" alt="Logo Sua Consulta" class="logo h-16">
+      <button onclick="logar()" class="login-button">
+        <img src="images/fotoPerfilImg.png" alt="Perfil" class="profile-icon">
+        LOGIN
+      </button>
+    </div>
+  </header>
+
+  <div class="carousel mt-0">
+    <div class="flex animate-[slide_15s_infinite]">
+      <img src="images/medicosSiteHome1.png" alt="Médicos atendendo" />
+      <img src="images/medicosSiteHome2.png" alt="Consultório médico" />
+      <img src="images/medicosSiteHome3.png" alt="Equipe médica" />
+    </div>
+  </div>
+
+  <div class="quote-section">
+    <p class="quote-text">"A saúde não é tudo, mas sem ela o resto é nada."</p>
+    <p class="quote-author">— Arthur Schopenhauer</p>
+  </div>
+
+  <section class="about-section">
+    <div class="about-content">
+      <img src="images/ImagemHome4.png" alt="Médico" class="about-image">
+      <div class="about-text">
+        <h2>Sobre o Projeto</h2>
+        <p>
+          O projeto SuaConsulta visa melhorar a gestão de atendimentos médicos em pequenas localidades por meio de uma aplicação tecnológica. Diante das dificuldades enfrentadas no sistema público de saúde brasileiro — como filas, superlotação e falta de recursos —, a proposta busca otimizar o agendamento de consultas, reduzir o tempo de espera e melhorar a eficiência dos serviços. Inspirado em modelos internacionais, o sistema pretende beneficiar pacientes, médicos e gestores com uma solução prática, segura e eficaz.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="news-section">
+    <h3>Notícias Sua Consulta</h3>
+    <div class="news-grid">
+      <div class="news-card">
+        <img src="images/ImagemHome6.png" alt="Notícia 1" class="news-image">
+        <div class="news-content">
+          <h4>Nova Unidade de Atendimento</h4>
+          <p>O Sua Consulta inaugura mais uma unidade de atendimento em São Paulo, ampliando o acesso à saúde para mais pessoas.</p>
+          <div class="news-divider"></div>
+          <div class="news-date">
+            <span>15/03/2024</span>
+            <span>14:30</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <img src="images/ImagemHome5.png" alt="Notícia 2" class="news-image">
+        <div class="news-content">
+          <h4>Parceria com Hospital Municipal</h4>
+          <p>Firmamos uma importante parceria com o Hospital Municipal para melhorar ainda mais o atendimento aos pacientes.</p>
+          <div class="news-divider"></div>
+          <div class="news-date">
+            <span>10/03/2024</span>
+            <span>09:15</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <img src="images/noticia3.jpg" alt="Notícia 3" class="news-image">
+        <div class="news-content">
+          <h4>Novo Sistema de Agendamento</h4>
+          <p>Lançamos um novo sistema de agendamento online que promete reduzir o tempo de espera em até 50%.</p>
+          <div class="news-divider"></div>
+          <div class="news-date">
+            <span>05/03/2024</span>
+            <span>16:45</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <h3>Fundadores do Projeto</h3>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="member-content">
+          <img src="images/imagemPerfilHome1.png" alt="Criador 1">
+          <div class="member-info">
+            <p class="name">José Augusto</p>
+            <p class="role">Desenvolvedor Mobile</p>
+          </div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="member-content">
+          <img src="images/imagemPerfilHome2.png" alt="Criador 2">
+          <div class="member-info">
+            <p class="name">Enzo Ribeiro</p>
+            <p class="role">Desenvolvedor Backend</p>
+          </div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="member-content">
+          <img src="images/imagemPerfilHome3.png" alt="Criador 3">
+          <div class="member-info">
+            <p class="name">Bruno Xavier</p>
+            <p class="role">Analista de Documentação</p>
+          </div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="member-content">
+          <img src="images/imagemPerfilHome4.png" alt="Criador 4">
+          <div class="member-info">
+            <p class="name">Emanuelle Oliveira</p>
+            <p class="role">Estagiaria</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Sobre Nós</h4>
+        <p>O SuaConsulta é um sistema inovador que visa melhorar o acesso à saúde pública, facilitando o agendamento de consultas e otimizando o atendimento médico.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Links Úteis</h4>
+        <ul>
+          <li><a href="#">Política de Privacidade</a></li>
+          <li><a href="#">Termos de Uso</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contato</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Contato</h4>
+        <p>Email: contato@suaconsulta.com.br</p>
+        <p>Telefone: (11) 1234-5678</p>
+        <p>Endereço: Rua Rio de janeiro, 123 - São Paulo, SP</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2024 SuaConsulta. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>

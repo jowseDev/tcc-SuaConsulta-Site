@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sua Consulta</title>
+    <!--
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/formatador.js"></script>-->
+    <link rel="stylesheet" href="/css/styleMedico.css">
+</head>
+
+<body>
+
+    <button onclick="voltarInicio()">Fechar menu</button>
+
+    <h2>Buscar Pessoa por CPF</h2>
+    <input type="text" id="cpfInput" placeholder="Digite o CPF" maxlength="14" oninput="formatarCPF(this)" required
+        autocomplete="off">
+    <button id="buscarBtn">Buscar</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        $(document).ready(function () {
+            $('#buscarBtn').click(function () {
+                const cpf = $('#cpfInput').val().trim();
+    
+                if (!cpf) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Campo vazio',
+                        text: 'Por favor, informe um CPF.',
+                        customClass: {
+                            popup: 'popup-alerta',
+                            title: 'titulo-alerta',
+                            htmlContainer: 'conteudo-alerta'
+                        }
+                    });
+                    return;
+                }
+    
+                $.ajax({
+                    url: `http://localhost:8080/api/atendente/${cpf}`,
+                    type: 'GET',
+                    success: function (pessoa) {
+                        mostrarFormularioCadastroMedico(pessoa);
+                    },
+                    error: function (xhr) {
+                        let titulo = 'Erro';
+                        let texto = 'Ocorreu um erro inesperado ao buscar a pessoa.';
+                        let icone = 'error';
+    
+                        if (xhr.status === 404) {
+                            titulo = 'Pessoa não encontrada';
+                            texto = 'Não foi possível encontrar uma pessoa com este CPF.';
+                        } else if (xhr.status === 409) {
+                            titulo = 'Já é médico';
+                            texto = 'Esta pessoa já está cadastrada como médico.';
+                            icone = 'warning';
+                        }
+    
+                        Swal.fire({
+                            icon: icone,
+                            title: titulo,
+                            text: texto,
+                            customClass: {
+                                popup: 'popup-alerta',
+                                title: 'titulo-alerta',
+                                htmlContainer: 'conteudo-alerta'
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    
+        function mostrarFormularioCadastroMedico(pessoa) {
+            Swal.fire({
+                title: 'Cadastrar Atendente',
+                html: `
+                    <div class="dados-pessoa-alerta">
+                        <p><strong>Nome:</strong> <span id="pessoaNome">${pessoa.nome}</span></p>
+                        <p><strong>CPF:</strong> <span id="pessoaCpf">${pessoa.cpf}</span></p>
+                    </div>
+                    <input id="cnesInput" class="swal2-input campo-especialidade" placeholder="CNES">
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Salvar',
+                cancelButtonText: 'Cancelar',
+                focusConfirm: false,
+                customClass: {
+                    popup: 'popup-alerta',
+                    title: 'titulo-alerta',
+                    htmlContainer: 'conteudo-alerta',
+                    confirmButton: 'botao-confirmar',
+                    cancelButton: 'botao-cancelar'
+                },
+                preConfirm: () => {
+                    const cnes = $('#cnesInput').val().trim();
+    
+                    if (!cnes) {
+                        Swal.showValidationMessage("Preencha todos os campos!");
+                        return false;
+                    }
+    
+                    return { cnes };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    cadastrarAtendente(pessoa.cpf, result.value.cnes);
+                }
+            });
+        }
+    
+        function cadastrarAtendente(cpf, cnes) {
+            $.ajax({
+                url: `http://localhost:8080/api/atendente/adicionar`,
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ cpf, cnes }),
+                success: function () {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Sucesso!',
+                        text: 'Pessoa promovida a atendente.',
+                        customClass: {
+                            popup: 'popup-alerta',
+                            title: 'titulo-alerta',
+                            htmlContainer: 'conteudo-alerta'
+                        }
+                    });
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro',
+                        text: 'Não foi possível promover a pessoa a atendente.',
+                        customClass: {
+                            popup: 'popup-alerta',
+                            title: 'titulo-alerta',
+                            htmlContainer: 'conteudo-alerta'
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+    
+
+
+</body>
+
+</html>
+
