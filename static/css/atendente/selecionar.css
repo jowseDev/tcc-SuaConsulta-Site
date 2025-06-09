@@ -8,89 +8,164 @@ body {
 }
 
 header {
-    padding: 0;
-    background-color: white;
+    background-color: #2011b1;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 70px;
+    position: relative;
+}
+
+.back-button {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+    transform: translateY(-50%) rotate(-10deg);
+}
+
+.back-button img {
+    height: 30px;
+    width: auto;
 }
 
 .logo {
-    height: 64px;
-    display: block;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    height: 40px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    border-radius: 6px;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
-}
-
-.main-content {
-    flex: 1;
     padding: 40px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.selection-container {
-    background-color: white;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+h1 {
+    color: #10089d;
     text-align: center;
-    max-width: 500px;
-    width: 100%;
+    margin-bottom: 30px;
+    font-size: 28px;
 }
 
-.selection-container h2 {
+.search-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.search-container h2 {
     color: #10089d;
     margin-top: 0;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-size: 24px;
+    text-align: center;
 }
 
-.selection-buttons {
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #10089d;
+    box-shadow: 0 0 0 2px rgba(16, 8, 157, 0.1);
+    outline: none;
+}
+
+.button-group {
     display: flex;
-    flex-direction: column;
     gap: 15px;
+    justify-content: center;
 }
 
-.selection-button {
+button {
+    display: block;
+    width: 300px;
+    margin: 15px auto;
+    padding: 15px 30px;
     background-color: #10089d;
     color: white;
-    padding: 15px 30px;
     border: none;
     border-radius: 6px;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
 }
 
-.selection-button:hover {
+button:hover {
     background-color: #0d0b7a;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.back-button {
-    background-color: #6c757d;
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 20px;
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
-.back-button:hover {
-    background-color: #5a6268;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.error-message {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    padding: 12px;
+    margin-top: 20px;
+    text-align: center;
+    display: none;
+}
+
+.success-message {
+    color: #28a745;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    padding: 12px;
+    margin-top: 20px;
+    text-align: center;
+    display: none;
+}
+
+p {
+    text-align: center;
+    color: #333;
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+p:first-of-type {
+    margin-top: 40px;
+    font-size: 24px;
+    color: #10089d;
+    font-weight: bold;
 } 

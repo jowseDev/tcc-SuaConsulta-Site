@@ -1,22 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sua Consulta</title>
-</head>
-<body>
-    
-    <h1>Bem vindo, <span th:text="${nome}"></span></h1>
-
+    <title>Sua Consulta - Home</title>
+    <link rel="stylesheet" href="../../static/css/atendente/home.css">
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <header>
+        <a href="/atendente/logout" class="back-button">
+            <img src="../../static/images/botaoVoltarImg.png" alt="Voltar">
+        </a>
+        <img src="../../static/images/suaConsultaLogo.png" alt="Sua Consulta" class="logo">
+    </header>
 
-    <div id="calendar" style="max-width: 1200px; height: 500px; margin: auto;"></div>
-
-    <button onclick="window.location.href='/auth/atendente/agendar'">AGENDAR CONSULTA</button>
+    <div class="container">
+        <h1>Bem vindo, <span th:text="${nome}"></span></h1>
+        
+        <div id="calendar"></div>
+        
+        <button onclick="window.location.href='/auth/atendente/agendar'">AGENDAR CONSULTA</button>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -63,7 +71,7 @@
                                 }
                             };
                         });
-
+                        
                         successCallback(events);
                     } catch (error) {
                         console.error('Erro ao carregar consultas:', error);
@@ -84,34 +92,22 @@
                         confirmButtonText: 'Fechar'
                     });
                 },
-                eventTimeFormat: { // Format time to always show hours and minutes
+                eventTimeFormat: {
                     hour: '2-digit',
                     minute: '2-digit',
                     meridiem: false
                 },
-                allDayText: '', // Translate "All Day" to Portuguese
+                allDayText: '',
                 buttonText: {
-                    today: 'Hoje', // Translate "Today" to Portuguese
-                    day: 'Dia', // Translate "Day" to Portuguese
-                    week: 'Semana', // Translate "Week" to Portuguese
-                    listWeek: 'Lista Semanal' // Correct translation for "listWeek"
-                },
-                eventDidMount: function(info) {
-                    // Apply card-like styling to events
-                    info.el.style.backgroundColor = info.event.backgroundColor || info.event.color;
-                    info.el.style.borderRadius = '8px';
-                    info.el.style.padding = '5px'; // Reduce padding for smaller height
-                    info.el.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.2)';
-                    info.el.style.color = 'black'; // Ensure text is readable
-                    info.el.style.textAlign = 'justify'; // Justify text inside the item
-                    info.el.style.marginBottom = '5px'; // Add spacing between items
-                    info.el.style.cursor = 'pointer'; // Change cursor to pointer on hover
+                    today: 'Hoje',
+                    day: 'Dia',
+                    week: 'Semana',
+                    listWeek: 'Lista Semanal'
                 }
             });
 
             calendar.render();
         });
     </script>
-
 </body>
 </html>
