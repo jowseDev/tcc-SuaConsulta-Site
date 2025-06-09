@@ -4,42 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
-    <link rel="stylesheet" href="/static/css/admin-home.css">
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/js/formatador.js"></script>
+    <link rel="stylesheet" href="../../static/css/admin/home.css">
+
 </head>
 <body>
     <header>
-        <img src="/static/img/logo.png" alt="Logo Sua Consulta" class="logo">
+        <img src="../../static/images/suaConsultaLogo.png" alt="Sua Consulta" class="logo">
     </header>
-
+    
     <div class="container">
-        <div id="admin-inicial" class="main-content">
-            <div class="welcome-section">
-                <h2>Seja bem-vindo, administrador!</h2>
-                <p>Escolha uma das opções abaixo para gerenciar o sistema:</p>
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="#" onclick="abrirMenuMedico()" class="active">Menu Médico</a>
+                </li>
+                <li>
+                    <a href="#" onclick="abrirMenuAtendente()">Menu Atendente</a>
+                </li>
+                <li>
+                    <a href="#" onclick="abrirMenuOutro()">Menu Postos de saúde</a>
+                </li>
+            </ul>
+        </aside>
+<!-- boteões caso o de cima nao funcionar
+        <div class="main-content">
+            <div id="admin-inicial">
+                <div class="welcome-section">
+                    <h2>Seja bem-vindo, administrador!</h2>
+                </div>
+                <div class="actions-section">
+                    <button class="action-button" onclick="abrirMenuMedico()"class="active">Menu Médico</button>
+                    <button class="action-button" onclick="abrirMenuAtendente()">Menu Atendente</button>
+                    <button class="action-button" onclick="abrirMenuOutro()">Menu Postos de saúde</button>
+                </div>
             </div>
-
-            <div class="actions-grid">
-                <div class="action-card" onclick="abrirMenuMedico()">
-                    <h3>Menu Médico</h3>
-                    <p>Gerenciar médicos do sistema</p>
-                </div>
-
-                <div class="action-card" onclick="abrirMenuAtendente()">
-                    <h3>Menu Atendente</h3>
-                    <p>Gerenciar atendentes do sistema</p>
-                </div>
-
-                <div class="action-card" onclick="abrirMenuOutro()">
-                    <h3>Menu Postos de Saúde</h3>
-                    <p>Gerenciar postos de saúde</p>
-                </div>
-            </div>
+        -->
+            <!-- Parte que será preenchida dinamicamente -->
+            <div id="admin-content" style="display: none;"></div>
         </div>
-
-        <div id="admin-content" class="main-content" style="display: none;"></div>
     </div>
 
     <script>
@@ -54,7 +60,10 @@
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    carregarConteudo('/auth/admin/listar/medico');
+                    //carregarConteudo('/auth/admin/listar/medico');
+                    html = 
+                    $('#admin-inicial').hide();           // Oculta a parte inicial
+                    $('#admin-content').html().show();
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     carregarConteudo('/auth/admin/cadastro/medico');
                 }
@@ -72,7 +81,7 @@
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    carregarConteudo('/auth/admin/listar/atendente');
+                    carregarConteudo('/auth/admin/listar/atendente'); //MUDAR ISSO AQ
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
                     carregarConteudo('/auth/admin/cadastro/atendente');
                 }
@@ -84,8 +93,8 @@
                 url,
                 type: 'GET',
                 success: function (html) {
-                    $('#admin-inicial').hide();
-                    $('#admin-content').html(html).show();
+                    $('#admin-inicial').hide();           // Oculta a parte inicial
+                    $('#admin-content').html(html).show(); // Mostra o conteúdo do menu
                 },
                 error: function () {
                     Swal.fire('Erro', 'Não foi possível carregar o conteúdo.', 'error');
@@ -94,9 +103,10 @@
         }
 
         function voltarInicio() {
-            $('#admin-content').hide().empty();
-            $('#admin-inicial').show();
+            $('#admin-content').hide().empty(); // Esconde e limpa o conteúdo atual
+            $('#admin-inicial').show();         // Mostra a tela inicial
         }
     </script>
+
 </body>
 </html>

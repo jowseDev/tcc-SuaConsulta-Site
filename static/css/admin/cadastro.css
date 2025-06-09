@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #2011b1;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 70px;
+    position: relative;
+}
+
+.back-button {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+    transform: translateY(-50%) rotate(-10deg);
+}
+
+.back-button img {
+    height: 30px;
+    width: auto;
+}
+
+.logo {
+    height: 40px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    border-radius: 6px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.main-content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 30px;
+    color:#0d0b7a;
+}
+
+.page-header h2 {
+    color: #10089d;
+    margin: 0;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.form-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.search-section {
+    margin-bottom: 30px;
+}
+
+.search-section h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.search-group {
+    display: flex;
+    gap: 10px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #10089d;
+}
+
+.search-button {
+    background-color: #10089d;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #0d0b7a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para o SweetAlert2 */
+.popup-alerta {
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.titulo-alerta {
+    color: #10089d;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.conteudo-alerta {
+    color: #333;
+    font-size: 16px;
+}
+
+.dados-pessoa-alerta {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.dados-pessoa-alerta p {
+    margin: 5px 0;
+    color: #333;
+}
+
+.campo-crm,
+.campo-especialidade {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.campo-crm:focus,
+.campo-especialidade:focus {
+    outline: none;
+    border-color: #10089d;
+}
+
+.botao-confirmar {
+    background-color: #10089d !important;
+    color: white !important;
+    padding: 12px 24px !important;
+    border: none !important;
+    border-radius: 6px !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+.botao-confirmar:hover {
+    background-color: #0d0b7a !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.botao-cancelar {
+    background-color: #6c757d !important;
+    color: white !important;
+    padding: 12px 24px !important;
+    border: none !important;
+    border-radius: 6px !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+.botao-cancelar:hover {
+    background-color: #5a6268 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+} 

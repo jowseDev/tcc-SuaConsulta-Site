@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
-    <link rel="stylesheet" href="/static/css/cadAtendentes.css">
+    <link rel="stylesheet" href="../../static/css/admin/cadastro.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/formatador.js"></script>
@@ -13,16 +13,15 @@
 
 <body>
     <header>
-        <img src="/static/img/logo.png" alt="Logo Sua Consulta" class="logo">
+        <a href="/admin/home" class="back-button">
+            <img src="../../static/images/botaoVoltarImg.png" alt="Voltar">
+        </a>
+        <img src="../../static/images/suaConsultaLogo.png" alt="Sua Consulta" class="logo">
     </header>
 
     <div class="container">
+        <h2 class="page-header">Cadastro de Atendente</h2>
         <div class="main-content">
-            <div class="page-header">
-                <h2>Cadastro de Atendente</h2>
-                <button onclick="voltarInicio()" class="back-button">Voltar</button>
-            </div>
-
             <div class="form-container">
                 <div class="search-section">
                     <h3>Buscar Pessoa por CPF</h3>
