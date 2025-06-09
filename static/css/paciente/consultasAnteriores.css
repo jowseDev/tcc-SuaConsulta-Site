@@ -16,18 +16,18 @@ body {
 
 header {
     background-color: #2011b1;
-    padding: 1rem 2rem;
+    padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 80px;
+    height: 60px;
     position: relative;
 }
 
 .back-button {
     position: absolute;
-    left: 20px;
+    left: 15px;
     top: 50%;
     transform: translateY(-50%);
     background: none;
@@ -42,14 +42,14 @@ header {
 }
 
 .back-button img {
-    height: 30px;
+    height: 25px;
     width: auto;
 }
 
 .logo {
-    height: 50px;
+    height: 40px;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-    border-radius: 8px;
+    border-radius: 6px;
 }
 
 .container {

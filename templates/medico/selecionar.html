@@ -1,25 +1,29 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
-    <link rel="stylesheet" href="/static/css/medico/selecionar.css">
+    <link rel="stylesheet" href="../../static/css/medico/selecionar.css">
 </head>
 <body>
     <header>
-        <img src="/static/img/logo.png" alt="Logo Sua Consulta" class="logo">
+        <a href="/medico/home" class="back-button">
+            <img src="../../static/images/botaoVoltarImg.png" alt="Voltar">
+        </a>
+        <img src="../../static/images/suaConsultaLogo.png" alt="Sua Consulta" class="logo">
     </header>
 
     <div class="container">
         <div class="main-content">
             <div class="selection-container">
-                <h2>Bem-vindo à página inicial do médico!</h2>
-                <p>Selecione o que você quer acessar:</p>
-
-    <button onclick="window.location.href='/auth/paciente/home'">Menu Paciente</button>
-
-    <button onclick="window.location.href='/auth/medico/home'">Menu médico</button>
-
+                <h2>Selecione uma opção</h2>
+                <div class="selection-buttons">
+                    <a href="/medico/consultasAgendadas" class="selection-button">Consultas Agendadas</a>
+                    <a href="/medico/consultasAtendidas" class="selection-button">Consultas Atendidas</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

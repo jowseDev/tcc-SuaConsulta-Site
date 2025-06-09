@@ -4,48 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
-    <link rel="stylesheet" href="/static/css/medico/consulta.css">
+    <link rel="stylesheet" href="../../static/css/medico/consulta.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <header>
-        <img src="/static/img/logo.png" alt="Logo Sua Consulta" class="logo">
+        <button class="back-button" onclick="window.location.href='/auth/medico/home'">
+            <img src="../../static/images/botaoVoltarImg.png" alt="Voltar">
+        </button>
+        <img src="../../static/images/suaConsultaLogo.png" alt="Logo" class="logo">
     </header>
 
     <div class="container">
         <div class="main-content">
-            <div class="page-header">
-                <h2>Consulta</h2>
-                <button onclick="voltarInicio()" class="back-button">Voltar</button>
-            </div>
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h2>Informações do Paciente</h2>
+                <ul>
+                    <li>Nome: <span th:text="${nomePessoa}"></span></li>
+                    <li>Idade: <span th:text="${idade}"> anos</span></li>
+                    <li>Sexo: <span th:text="${sexo}"></span></li>
+                </ul>
+            </aside>
 
-            <div class="consultation-container">
-                <aside class="patient-info">
-                    <h3>Informações do Paciente</h3>
-                    <ul>
-                        <li>Nome: <span th:text="${nomePessoa}"></span></li>
-                        <li>Idade: <span th:text="${idade}"> anos</span></li>
-                        <li>Sexo: <span th:text="${sexo}"></span></li>
-                    </ul>
-                </aside>
-
-                <main class="consultation-content">
-                    <h3>Prontuário da Consulta</h3>
-                    <div class="patient-description">
-                        <h4>Descrição do Paciente:</h4>
-                        <p><span th:text="${observacoes}"></span></p>
+            <!-- Main Content -->
+            <main class="consultation-content">
+                <h2>Prontuário da Consulta</h2>
+                <div class="patient-description">
+                    <h3>Descrição do Paciente:</h3>
+                    <p><span th:text="${observacoes}"></span></p>
+                </div>
+                <form id="consultaForm" th:action="@{/auth/medico/consulta}" method="POST" class="consultation-form">
+                    <input type="hidden" id="consultaId" name="consultaId" th:value="${id}">
+                    <div class="form-group">
+                        <label for="prontuario">Escreva o prontuário:</label>
+                        <textarea id="prontuario" name="prontuario" rows="10" cols="50" placeholder="Descreva os detalhes da consulta aqui..."></textarea>
                     </div>
-                    <form id="consultaForm" th:action="@{/auth/medico/consulta}" method="POST" class="consultation-form">
-                        <input type="hidden" id="consultaId" name="consultaId" th:value="${id}">
-                        <div class="form-group">
-                            <label for="prontuario">Escreva o prontuário:</label>
-                            <textarea id="prontuario" name="prontuario" rows="10" cols="50" placeholder="Descreva os detalhes da consulta aqui..."></textarea>
-                        </div>
-                        <button type="button" id="submitButton" class="submit-button">Salvar Prontuário</button>
-                    </form>
-                </main>
-            </div>
+                    <button type="button" id="submitButton">Salvar Prontuário</button>
+                </form>
+            </main>
         </div>
     </div>
 

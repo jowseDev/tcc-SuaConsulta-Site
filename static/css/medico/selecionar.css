@@ -8,26 +8,92 @@ body {
 }
 
 header {
-    padding: 0;
-    background-color: white;
+    background-color: #2011b1;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 70px;
+    position: relative;
+}
+
+.back-button {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+    transform: translateY(-50%) rotate(-10deg);
+}
+
+.back-button img {
+    height: 30px;
+    width: auto;
 }
 
 .logo {
-    height: 64px;
-    display: block;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    height: 40px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    border-radius: 6px;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: white;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-menu a:hover {
+    background-color: #f8f9fa;
+    color: #10089d;
+    border-left-color: #10089d;
+}
+
+.sidebar-menu a.active {
+    background-color: #f0f0ff;
+    color: #10089d;
+    border-left-color: #10089d;
+    font-weight: bold;
 }
 
 .main-content {
     flex: 1;
-    padding: 40px 20px;
+    padding: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,8 +142,41 @@ header {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.back-button {
-    background-color: #6c757d;
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-header h2 {
+    color: #10089d;
+    margin: 0;
+    font-size: 24px;
+}
+
+.search-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #10089d;
+}
+
+.search-button {
+    background-color: #10089d;
     color: white;
     padding: 12px 24px;
     border: none;
@@ -86,11 +185,62 @@ header {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 20px;
 }
 
-.back-button:hover {
-    background-color: #5a6268;
+.search-button:hover {
+    background-color: #0d0b7a;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.consultations-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.consultations-table th {
+    background-color: #10089d;
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.consultations-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+.consultations-table tr:last-child td {
+    border-bottom: none;
+}
+
+.consultations-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.action-icon {
+    color: #10089d;
+    text-decoration: none;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+}
+
+.action-icon:hover {
+    color: #0d0b7a;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-size: 18px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 } 

@@ -1,19 +1,33 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
-    <link rel="stylesheet" href="./static/css/medico/home.css">
+    <link rel="stylesheet" href="../../static/css/medico/home.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <header>
-        <img src="/static/img/logo.png" alt="Logo Sua Consulta" class="logo">
+        <a href="/medico/selecionar" class="back-button">
+            <img src="../../static/images/botaoVoltarImg.png" alt="Voltar">
+        </a>
+        <img src="../../static/images/suaConsultaLogo.png" alt="Sua Consulta" class="logo">
     </header>
 
     <div class="container">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="/medico/consultasAgendadas" class="active">Consultas Agendadas</a>
+                </li>
+                <li>
+                    <a href="/auth/medico/atendimentos">Consultas Atendidas</a>
+                </li>
+            </ul>
+        </aside>
+
         <div class="main-content">
             <div class="welcome-section">
                 <h2>Bem vindo, Dr(a). <span th:text="${nome}"></span></h2>
@@ -23,10 +37,6 @@
                 <h3>Próximas Consultas</h3>
                 <div id="consulta-info" class="consultations-container"></div>
                 <p id="consulta-detalhes" class="loading-text">Carregando informações das próximas consultas...</p>
-            </div>
-
-            <div class="actions-section">
-                <a href="/auth/medico/atendimentos" class="action-button">Consultas Atendidas</a>
             </div>
         </div>
     </div>
@@ -120,8 +130,5 @@
             });
         }
     </script>
-
-    <button onclick="window.location.href='/auth/medico/atendimentos'">Consultas atendidas</button>
-    <button></button>
 </body>
 </html>

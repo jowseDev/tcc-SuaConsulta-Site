@@ -8,15 +8,41 @@ body {
 }
 
 header {
-    padding: 0;
-    background-color: white;
+    background-color: #2011b1;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 70px;
+    position: relative;
+}
+
+.back-button {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+    transform: translateY(-50%) rotate(-10deg);
+}
+
+.back-button img {
+    height: 30px;
+    width: auto;
 }
 
 .logo {
-    height: 64px;
-    display: block;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    height: 40px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    border-radius: 6px;
 }
 
 .container {
@@ -131,22 +157,4 @@ header {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.back-button {
-    background-color: #6c757d;
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.back-button:hover {
-    background-color: #5a6268;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 } 

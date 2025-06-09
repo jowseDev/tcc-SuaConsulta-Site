@@ -4,44 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Consulta</title>
-    <link rel="stylesheet" href="/static/css/medico/consultasAtendidas.css">
+    <link rel="stylesheet" href="../../static/css/medico/consultasAtendidas.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <header>
-        <img src="/static/img/logo.png" alt="Logo Sua Consulta" class="logo">
+        <button class="back-button" onclick="window.location.href='/medico/home'">
+            <img src="../../static/images/botaoVoltarImg.png" alt="Voltar">
+        </button>
+        <img src="../../static/images/suaConsultaLogo.png" alt="Logo" class="logo">
     </header>
 
     <div class="container">
         <div class="main-content">
             <div class="page-header">
                 <h2>Consultas Atendidas</h2>
-                <button onclick="voltarInicio()" class="back-button">Voltar</button>
             </div>
 
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Buscar consultas...">
-                <button class="search-button">Buscar</button>
-            </div>
-
-            <table class="consultations-table">
-                <thead>
-                    <tr>
-                        <th>Data</th>
-                        <th>Paciente</th>
-                        <th>Motivo</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="consultas-container">
-                    <!-- As consultas serão inseridas aqui via JavaScript -->
-                </tbody>
-            </table>
-
-            <div id="no-results" class="no-results" style="display: none;">
-                Nenhuma consulta encontrada.
-            </div>
+            <div id="consultas-container"></div>
         </div>
     </div>
 
@@ -51,6 +32,11 @@
             .then(response => {
                 const consultas = response.data || [];
                 const container = document.getElementById('consultas-container');
+
+                if (consultas.length === 0) {
+                    container.innerHTML = '<div class="no-results">Nenhuma consulta atendida encontrada.</div>';
+                    return;
+                }
 
                 consultas.forEach(consulta => {
                     // Format date and time
@@ -62,16 +48,25 @@
                     // Create a container for each consultation
                     const consultaItem = document.createElement('div');
                     consultaItem.style.border = '1px solid #ccc';
-                    consultaItem.style.padding = '10px';
-                    consultaItem.style.marginBottom = '10px';
+                    consultaItem.style.padding = '20px';
+                    consultaItem.style.marginBottom = '15px';
+                    consultaItem.style.borderRadius = '8px';
+                    consultaItem.style.backgroundColor = '#fff';
+                    consultaItem.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
 
                     // Add date
                     const dataElement = document.createElement('p');
+                    dataElement.style.fontSize = '16px';
+                    dataElement.style.marginBottom = '10px';
+                    dataElement.style.color = '#333';
                     dataElement.textContent = `Data: ${formatDateTime(consulta.data)}`;
                     consultaItem.appendChild(dataElement);
 
                     // Add patient name
                     const nomeElement = document.createElement('p');
+                    nomeElement.style.fontSize = '16px';
+                    nomeElement.style.marginBottom = '10px';
+                    nomeElement.style.color = '#333';
                     nomeElement.textContent = `Paciente: ${consulta.nome}`;
                     consultaItem.appendChild(nomeElement);
 
@@ -79,6 +74,14 @@
                     const detalhesButton = document.createElement('button');
                     detalhesButton.textContent = 'Ver Detalhes';
                     detalhesButton.style.marginTop = '10px';
+                    detalhesButton.style.padding = '10px 20px';
+                    detalhesButton.style.backgroundColor = '#10089d';
+                    detalhesButton.style.color = 'white';
+                    detalhesButton.style.border = 'none';
+                    detalhesButton.style.borderRadius = '6px';
+                    detalhesButton.style.cursor = 'pointer';
+                    detalhesButton.style.fontSize = '14px';
+                    detalhesButton.style.fontWeight = 'bold';
                     detalhesButton.onclick = () => {
                         Swal.fire({
                             title: 'Detalhes da Consulta',
@@ -100,17 +103,9 @@
             })
             .catch(error => {
                 console.error('Erro ao buscar consultas:', error);
-                Swal.fire({
-                    title: 'Erro',
-                    text: 'Não foi possível carregar as consultas.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
+                const container = document.getElementById('consultas-container');
+                container.innerHTML = '<div class="no-results">Erro ao carregar as consultas. Por favor, tente novamente.</div>';
             });
-
-        function voltarInicio() {
-            window.location.href = '/auth/medico/home';
-        }
     </script>
 </body>
 </html>
